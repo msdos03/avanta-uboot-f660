@@ -1,0 +1,512 @@
+﻿03-Oct-2012
+
+Release notes for Avanta U-Boot, release: 4.1.2_PQ
+===================================================
+
+IMPORTANT:
+==========
+- When upgrading from Uboot version 2.x.x it is required to reset the Uboot env 
+  variables by running "resetenv; reset" from Uboot prompt (after Uboot upgrade).
+
+
+Table of Contents
+-----------------
+1.    Contents of Release
+2.    Supported boards/CPU's/
+3.    How to build and burn U-Boot.
+4.    Board configurations
+5.    Changes from Previous Releases
+6.    Known Issues
+7.    Disclaimer	
+
+
+1. Contents of Release (n)
+==========================
+
+  Included in current release:
+ 
+  -) U-Boot source code patch (for u-boot-2009.08)
+ 
+  -) Supported features  for 65xx
+        - Little endian.
+	- Big endian.
+	- DDR2 & DDR3.
+        - Uart 0.
+        - PCI-E 0 & 1.
+        - Reset.
+	- NAND Flash.
+	- NOR flash.
+	- SPI flash.
+	- USB.
+	- Auto detection of on-board modules (DB-88F65xx-BP board).
+
+  -) Supported features  for 6601
+        - Little endian.
+	- DDR3.
+        - Uart 0.
+        - Internal GBE phy.
+        - SGMII GBE LP SERDES.
+        - Reset.
+	- SatR
+	- SPI flash.
+	- Auto detection of on-board modules (DB-88F6601-BP board).
+
+
+
+2.    Supported boards/CPU's
+============================
+
+   This U-Boot version supports the following boards:
+ 
+   Boards
+   ======
+	DB-88F6500-BP
+	RD-88F6510-SFU
+	RD-88F6560-GW
+	DB-88F6560-PCAC
+	DB-88F6601-BP
+	RD-88F6601-MC
+
+	
+3. How to build and Burn U-Boot
+===============================
+
+   Building U-Boot
+   ===============
+
+   -) Download U-Boot release 2009.08 from ftp://ftp.denx.de/pub/u-boot/.
+
+   -) Update the U-Boot 2009.08 release by copying the patch of this release.
+   
+   -) Export your cross compiler using the command: export CROSS_COMPILE=/path/to/your/cross/compiler
+
+   -) Build the U-Boot binaries as follows:
+
+   $ make mrproper 
+   $ make <board_name> <options>
+   $ make
+
+   Where <board_name> is the targe board:
+	db88f6500bp_config
+	rd88f6510sfu_config
+	rd88f6530mdu_config
+	rd88f6560gw_config
+	db88f6500pcac_config
+	db88f6601bp_config
+	rd88f6601mc_config
+
+   Where <options> is:
+	NANDBOOT=1	- boot from NAND flash.
+	SPIBOOT=1	- boot from SPI flash.
+	NORBOOT=1	- boot from NOR flash.
+	NAND=1		- support read/write from NAND.
+	SPI=1		- support read/write from SPI.
+	NFC=1		- support NAND Flash Controller instead of Device-Bus based NAND flash.
+	NOR=1		- support  read/write from NOR.
+	BE=1		- support for Big-Endian mode.
+	DDR3=1		- DDR3 support.
+	USB=1		- USB support.
+
+   For example:
+   $ make db88f6500bp_config NANDBOOT=1 NAND=1
+	will build image for DB-88F6500-BP board with support booting from NAND. NANd flash will be usable.
+
+   -) The BootRom header files are located in the source root directory:
+	-> dramregs_400db_kw2_ddr2.txt
+	-> dramregs_533db_kw2_ddr3.txt
+	-> dramregs_266rd_kw2_ddr2.txt
+	-> dramregs_400rd_kw2_ddr2.txt
+	-> dramregs_533rd_kw2_ddr3.txt
+	-> dramregs_533db_pcac_kw2_ddr3.txt
+	-> dramregs_400db_A-MC_ddr3.txt
+	-> dramregs_400db_A-MC_ddr2.txt
+	-> dramregs_400rd_A-MC_ddr3.txt
+
+      The files have predefined register settings for the different SDRAM configurations and required errata. 
+      The matching header file is appended to the U-boot image during the make process according to the device
+      and board type, using the doimage utility which is located in the /tools directory. The output file to be
+      burnt on boot ROM depends on the make parameters:
+	-> NANDBOOT=1 : u-boot-<board name>_<SDRAM clock frequency>_<ddr type>_nand.bin
+	-> SPIBOOT=1 : u-boot-<board name>_<SDRAM clock	frequency>_<ddr type>_spi.bin
+	-> NORBOOT=1 : u-boot-<board name>_<SDRAM clock frequency>_<ddr	type>_nor.bin
+	
+      The file u-boot-<board name>_<SDRAM clock frequency>_<ddr type> uart.bin is used for debug purposes for booting the 
+      U-boot image through the UART port.
+      Important: Use the UART file that matches the boot device on the target board.
+	e.g. when booting from NAND, use the uart binary that is produced from compiling UBoot with NANDBOOT=1 NAND=1.
+	This file can also be found in the relevant directory under the "images/" tree.
+
+
+   Burning U-Boot
+   ==============
+
+   When burning the new U-Boot image to a board that already runs a previous U-Boot image the following sequence
+   can be used to load the image using tftp to the board and burn it:
+	1. Start a tftp server on the host PC, whose directory is set to point to the directory contaning the 
+	   new U-Boot bin image.
+	2. Connect an Ethernet cable to the RJ-45 connector of the board.
+	3. Configure the U-Boot environment parameters using the following commands:
+		> setenv serverip xx.xx.xx.xx	(xx.xx.xx.xx should be the IP address of the PC runing the tftp server)
+		> setenv ipaddr yy.yy.yy.yy     (yy.yy.yy.yy should be some IP address with the same subnet as the server)
+	4. run the bubt command to load and burn the U-Boot image:
+		> bubt u-boot-<board name>_<SDRAM clock frequency>_<boot device>.bin
+	5. Once the image is loaded the user is asked whether the environment parameters should be overwritten or not
+	   , and answering y or n to thios question will start the burn process.
+	6. Once the burn is complete the board can be restarted, and the new U-Boot image will be run.
+	
+   In case the original U-Boot image was damaged, or when whishing to burn a different boot device than the current one, 
+   the U-Boot command cannot be used, and a debugger is required to load the U-Boot ELF image into the SDRAM, using the 
+   following procedure:
+	1. Connect a debugger (Marvell uses a Lauterbach debugger, so the supplied scripts are written for this type of debugger)
+	   to the debugger port of the board.
+	2. From the file menue of the debugger SW choose the "run batch file" option and load the kw_dimm400.cmm file.
+	3. From the file menue of the debugger SW choose the "load" option and load the U-Boot ELF file (The one without any extension).
+	4. Once the loading is done change the following using the debugger SW:
+		- CPU PC to 0x670000.
+	5. Start the CPU by pressing "Go" in the debugger SW, and the loaded U-Boot image will boot the board, and now the new image can
+	   be burnt to the required boot device using the bubt command.
+
+
+4.    Board configurations
+==========================
+4.1 How To Configure Auto-Detected Modules EEPROM on 65xx
+=========================================================
+When configuring modules on the DB board. You need to fill the EEPROM with the right configuration.
+Use the table below to configure the EEPROM:
+-----------------------------------------
+bit #	Board Marking	Function
+0	JP5		Switch to MAC connection
+1	JP6		Switch to MAC connection
+2	JP8		SERDES SRC
+3	JP10		SERDES SRC
+4	JP11		RGMII-A SRC
+5	JP12		RGMII-A SRC
+6	JP17		GEPHY SRC
+7	JP18		GEPHY SRC
+-----------------------------------------
+Switch to MAC connection (QSGMII module plugged-in):
+JP5 JP6
+ 0   0	MAC0 => Switch => QSGMII
+ 0   1	N/A
+ 1   0	MAC1 => Switch => QSGMII
+ 1   1	(MAC0 + MAC1) => Switch => QSGMII
+
+Switch to MAC connection (no QSGMII module, no SGMII on SERDES):
+JP5 JP6
+ 0   0	No switch
+ 0   1	MAC0 => Switch => 3xFE
+ 1   0	MAC1 => Switch => 3xFE
+ 1   1	(MAC0 + MAC1) => Switch => 3xFE
+
+Switch to MAC connection (no QSGMII module, SGMII connected to SERDES(check JP8
+& JP10 configuration):
+JP5 JP6
+ 0   0	N/A
+ 0   1	MAC0 => Switch(Port #1) => SGMII
+ 1   0	N/A
+ 1   1	(MAC0 + MAC1) => Switch(Port #1) => SGMII
+
+----------------------------------------- 
+SERDES SRC - Which module is connected to the SERDES?:
+JP8 JP10
+ 0   0    None
+ 1   0    SATA
+ 0   1    SGMII - 
+ 1   1    N/A (SDIO)
+----------------------------------------- 
+RGMII-A SRC - When RGMII-A is in use (connected on board), What's it source?:
+JP11 JP12
+ 0    0   Switch port 6 source
+ 1    0   MAC0 source
+ 0    1   MAC1 source
+ 1    1   Switch port 5 source
+----------------------------------------- 
+GEPHY SRC - What's the GE PHY source?:
+JP17 JP18
+ 0    0   None
+ 1    0   MAC1 source
+ 0    1   Switch port 0 source
+ 1    1   Switch port 5 source
+-----------------------------------------
+ The EEPROM possible values are:
+            0 - Jumper on 1-2
+            1 - Jumper on 2-3
+* Please use jumpers for all bits.
+
+4.2 How To Configure Auto-Detected Modules EEPROM on 6601
+=========================================================
+jumper configuring modules on the DB board. 
+
+Jumper 	Name			Function
+JP0	MAC connection		0 – MAC1 connected to GBE PHY and MAC0 connected to LP SerDes
+				1 – MAC1 connected to LP SerDes 
+JP1	Ethernet capacity	0 – Single Ethernet channel (GBE only)
+				1 – Dual Eth. channels
+JP2	LP SerDes connection	0 - LP SerDes connected to GBE PHY
+				1 - LP SerDes connected to SFP
+JP3	LP SerDes mode		0 - LP SerDes at 1.25G mode
+				1 - LP SerDes at 2.5G mode
+JP4	FXS presence 		0 – FXS presented
+				1 – FXS missing
+JP5	PON BEN polarity	0 – BEN active low
+				1 – BEN active high
+JP6	Reserved	
+JP7	Reserved	
+
+5. Changes from Previous Releases (Whenever a device name is not specified, the change is relevant for all boards)
+==================================================================================================================
+
+  U-boot 4.1.2
+  =============
+  1. Support 4 address cycle SPI flash direct read mode in Avanta-MC.
+
+  U-boot 4.1.1
+  =============
+  1. Support SGMII connected to switch port #1 - check also updated jumper settings.
+  2. Unified images build script for 88F65xx & 88F6601.
+  3. Fixed mvBoardIsPortInSgmii() to return correct value per port.
+  4. Reset switch in case new configuration should be loaded: removed
+     dependency between U-Boot and LSP releases.
+ 
+  U-boot 4.1.0
+  =============
+  1. Updated values for DDR2/DDR3 registers: 0x1430, 0x1434 and 0x14B0 for DB-6601.
+  2. Fixed temperture command to support signed values.
+  3. Updated FTDLL parameters for 660 SoC DDR2/DDR3 RD & DB.
+  4. Disable I/D cache prefetch by default for 6601 SoC.
+  5. Update ST Micro SPI driver to support KW2 or Avanta-MC in compile-time.
+  6. Fixed Marvell uclibc compiler errors/warnings by reordered section and function declarations in jump.S.
+     Additionally updated -march flag from armv5t to armv5te.
+  7. Enable EEE support for Avanta-MC internal GbE PHY and on board 1512 PHY.
+
+  U-boot 4.0.7_X_BAR
+  ==================
+  1. Support SPI flash MX25L25635E with 32bit address cycle mode.
+  2. Minor code cleanup.
+
+  U-boot 4.0.6_X_BAR
+  ==================
+  1. Update DRAM register settings.
+  2. print DOT "." while writing to SPI flash
+
+  U-boot 4.0.5_X_BAR
+  ==================
+  1. Disable automatic windows detected. (enable only Cross BAR windows)
+  2. Disable DDR2 cross BAR windows enable bit in DDR2 register header.
+
+
+  U-boot 4.0.5
+  ============
+  1. Enable GMAG1 on RD board.
+  2. Change the order of the boards structures in the file mvBoardEnvSpec.c 
+	Last 3 boars:
+	•	RD-88F6601 Avanta
+	•	DB-88F6601-BP Avanta
+	•	Customer board place holder 
+
+
+  U-boot 4.0.4
+  ============
+  1. Fixed DRAM register setting for Avanta-MC DDR2 and DDR3.
+
+  U-boot 4.0.3
+  ============
+  1. New DRAM register setting for Avanta-MC DDR2 and DDR3
+  2. Shutdown clock RD_88F6601_MC GIGA1
+  3. Fixed output print for Avanta-MC module.
+  4. Fixed bug in KW2 when reading the SoC model version from PCIe register 0x40000
+  5. Avanta-MC- Enable automatic crossover for all modes.
+
+
+  U-boot 4.0.2
+  ============
+  1. Fixed in DRAM Control register the single device size.
+  2. Fixed TDM jumper polarity and TDM configuration.
+  3. Fixed GPP LP SERDES initialization.
+  4. Added XCVR mux configure.
+
+   
+   
+  U-boot 4.0.1
+  ============
+  1. Support RD88F6601-MC.
+  2. Fixed include file from NETA directory instead of eth (previous Legacy GBE directory).
+  3. Fixed MDC/MDIO segment power level.
+  4. Fixed GBE speed to auto negotiation.
+   
+  U-boot 4.0.0
+  ============
+  1. Support DB88F6601-BP.
+   
+  U-boot 3.2.1
+  ============
+  1. Added support for 1500/500/500 frequency option
+  2. Fixed recovery command for RD SFU board
+  3. added NAND parameters in make file for RD MDU board
+
+  U-boot 3.2.0
+  ============
+  1. Updated USB phy init values.
+  2. Add an option to boot from SPI flash, and work with NAND flash under UBoot.
+  3. Added new field in mvBoardSpec (nandFlashParamsValid) to specify if the device-bus 
+     NAND flash timing parameters are valid.
+  4. Added new GPIO types: BOARD_GPP_PON_XVR_TX, BOARD_GPP_SYS_LED & BOARD_GPP_PON_LED.
+     And added initialization for each according to boards (DB, RD-SFU, RD-GW) definition.
+  5. Updated initializations of SERDES when working in QSGMII / SGMII modes.
+  6. Updated initialization for 3xFE PHY.
+
+  U-boot 3.1.0
+  ============
+  1. Add support for DB-88F6560-PCAC board.
+  2. Rearrange board info in mvBoardEnvSpec.h & mvBoardEnvSpec.c
+  3. Use correct naming for SMI single-chip & multi-chip addressing mode.
+     - The command to control SMI addressing mode was changed to switchSingleChipAddrMode.
+  4. Fixed PCI-E End-Point support code.
+
+  U-boot 3.0.0
+  ============
+  1. Remove unneeded delay before checking PCI-E link. Delay changed to 1ms instead of 500ms.
+  2. Add support for switch multi-address access:
+	- RD-SFU is set for multi-address mode.
+	- DB will be set to multi-address mode if ethernet-complex configuration allows and 
+	  multi-address mode is enabled for DB (See 8 below).
+  3. Added the ability to disable auto-detection on DB board, by configuring the boardSpec's 
+     moduleAutoDetect field to MV_FALSE.
+  4. Added support for temperature sensor (get_temperature command from Uboot prompt).
+  5. Fixed initialiation of internal 3xFE-PHY to support booting system with 10Mbps link.
+  6. Fixed bug in bubt command (for NAND) when the user requires the env variables to be deleted 
+     as part of the Uboot update process.
+  7. Renamed "fi" Uboot command to "find".
+  8. Added new commands "switchAddressModeSet / switchAddressModeGet" to control whether the DB board can
+      work in switch multi-address mode when the ethernet-complex configuration allows that.
+  9. Added support for multi-image boot, this can be enabled be running the following in Uboot
+      prompt: "setenv dual_image yes; saveenv; reset"
+  10. Enabled Uboot hush-parser to enable scripting capabilities in Uboot shell.
+     All variables in Uboot shell must be referenced by ${} and not $().
+  11. Enabled command-line editing and command history in Uboot prompt.
+  12. Removed unneeded delay before internal switch initialization.
+  13. Replaced 1000ms delay with 100ms after GPIO Pex reset toggling.
+
+  U-boot 2.3.2
+  ============
+  1. Disable L2-Cache in RD-SFU regardless of reset strap.
+
+  U-boot 2.3.1
+  ============
+  1. Fixed bug in 3xFE PHY shutdown, that caused QSGMII PHY register read through the switch to return bad values.
+     (Relevant when working in Multi-Address mode only).
+  2. Removed changes to default value of register 0x18480 in A0 devices.
+  
+  U-boot 2.3.0
+  ============
+  1. Added support for KW2-A0 devices.
+  2. Update initialization of internal GE-PHY (To support A0 devices).
+
+  U-boot 2.2.0
+  ============
+  1. Update DB & RD-GW dram parameters (in dramregs files).
+  2. Update RD-SFU dram configuration to use direct CPU DRAM access.
+  3. Remove unneeded register writes from RD-SFU dramregs file.
+  4. Fixed bug in doimage to work on 64-bit machines (host).
+  5. Change default UBoot network driver to use Neta mode (non-accelerated) 
+     instead of Legacy GbE mode.
+  6. Update eth-phy HAL to support initialization of Quad PHY through
+     switch SMI interface.
+  7. Added support for MII mode in MAC0, MAC1, Switch Port 5 and Switch
+     Port 6. 
+  8. Changed mapping of Jumpers 5 & 6 on DB board to enable working in
+     SFU mode (Both MACs are connected to switch). See JP5,6 mapping
+     description above.
+     Also see important notice at the head of this document.
+
+  U-boot 2.1.12
+  =============
+  1. Update DDR params for KW2-RD-GW board.
+  2. Add support for 1545-Z1 Quad PHY.
+  3. Fixed bug in MPP output driver configuration when RGMII-B is used.
+  4. Update list of supported CPU/L2/DDR frequencies.
+
+
+  U-boot 2.1.11
+  =============
+  1. Add support for Neta based network driver (disabled by default).
+  2. Change PHY init internal functions to receive the PHY address to operate on.
+  3. Added new functions: mvBoardPhyAddrSet & mvBoardMacSpeedSet to set PHY address and MAC speed for a given
+     board.
+  4. Fixed bug in Mac speed setup when using SGMII interface.
+  5. Fixed bug in board Sample-At-Reset command (SaR) for SSCG.
+  6. Added new parameters in board-Spec (forceLinkMask), to specify which external switch ports should have 
+     force link configured.
+  7. Added definition of PON P2P-BEN GPP as part of board-spec.
+  8. Added function mvCtrlEthComplexMppUpdate() to reconfigure ethernet complex MPPs at runtime (Not used by Uboot).
+  9. Re-organization of MV_ETH_SATA_COMPLEX_OPTIONS enum elements for backward compatibility.
+  10. Fixed bug in network driver to set force link according to board-spec.
+  11. Renamed network driver from mv_egiga.c/.h to mv_egiga_legacy.c/.h
+
+
+  U-boot 2.1.10
+  =============
+  1. Added support for 1545-A0 Quad PHY.
+  2. Removed unused file board/mv_feroceon/mv_kw2/config/mvRules.mk
+
+  U-boot 2.1.9
+  ============
+  1. Added support for JFFS2 file-system (enabled by passing JFFS=1 in make command).
+  2. Change SMI access functions (in eth-phy HAL) to get the SMI register address from upper layers.
+  3. Update RD-88F6510-SFU board MPP configuration (Set MPP #64 to GPIO input).
+  4. Updated boards definition structures with new param for power-Management power-up delay (Not relevant for UBoot).
+
+  U-boot 2.1.8
+  ============
+  1. Add support for NAND Flash Controller (Can be enabled by passing NFC=1 to the make command).
+  2. Increase the maximum number of UBoot environment command arguments to 32 (from 16).
+  3. Coding style fixes.
+  4. Fix 154x Quad phy initialization: Disable MacSec when not in EEE mode,
+     and fix EEE mode init sequence.
+  5. Fix MPP initialization for RD-88F6560 board.
+  6. Update some registers default value.
+  7. Update MPP configuration for DB, RD & GW boards.
+
+  U-boot 2.1.7
+  ============
+  1. disable MacSec for 1545 Quad PHY.
+
+  U-boot 2.1.6
+  ============
+  1. Added support for RD-88F6560-GW board.
+  2. Changed environment varialbes soze on flash to 4KB.
+  3. Updated initialization for internal GE-PHY.
+  4. Updated PCI-E initialization sequence - Enable CPU-IF Pex after Pex PHY intialization.
+  5. Added integrated Sata controller support.
+  6. Added support for configurable PEX reset pin per board.
+  7. Removed unsupported CPU/L2/DDR frequencies.
+  8. Shutdown of all unused interfaces, and shutdown of all unsupported interfaces on 88F6510 devices.
+  9. Fixed bug when GE-PHY is connected to switch ports #0 or #5.
+  10. Fixed bug in system initialization when L2-Cache does not exist (according to SAR).
+  11. Fixed bug when working in NAND 4bit ECC mode.
+
+
+  U-boot 2.1.5
+  ============
+  1. Code cleanup and compilation warnings removal.
+  2. Added initial support for NAND flash Controller (Not enabled by default)
+  3. Added support for No-L2 mode, for device flavors that do not support L2 cache.
+  4. Added clock gating for all unused interfaces.
+  5. Updated KW2-DB board MPP configuration for Deep-Idle support in Linux.
+  6. fixed bug in mvCtrlPwrClckGet() to use correct bits for TDM & NAND units.
+
+
+6. Known issues
+===============
+
+  - None.
+
+	
+7. Disclaimer
+=============
+This document provides preliminary information about the products described, and such information should not be used for purpose of final design. Visit the Marvell® web site at www.marvell.com for the latest information on Marvell products.
+
+No part of this document may be reproduced or transmitted in any form or by any means, electronic or mechanical, including photocopying and recording, for any purpose, without the express written permission of Marvell. Marvell retains the right to make changes to this document at any time, without notice. Marvell makes no warranty of any kind, expressed or implied, with regard to any information contained in this document, including, but not limited to, the implied warranties of merchantability or fitness for any particular purpose. Further, Marvell does not warrant the accuracy or completeness of the information, text, graphics, or other items contained within this document. Marvell makes no commitment either to update or to keep current the information contained in this document. Marvell products are not designed for use in life-support equipment or applications that would cause a life-threatening situation if any such products failed. Do not use Marvell products in these types of equipment or applications. The user should contact Marvell to obtain the latest specifications before finalizing a product design. Marvell assumes no responsibility, either for use of these products or for any infringements of patents and trademarks, or other rights of third parties resulting from its use. No license is granted under any patents, patent rights, or trademarks of Marvell. These products may include one or more optional functions. The user has the choice of implementing any particular optional function. Should the user choose to implement any of these optional functions, it is possible that the use could be subject to third party intellectual property rights. Marvell recommends that the user investigate whether third party intellectual property rights are relevant to the intended use of these products and obtain licenses as appropriate under relevant intellectual property rights. 
+Marvell comprises Marvell Technology Group Ltd. (MTGL) and its subsidiaries, Marvell International Ltd. (MIL), Marvell Semiconductor, Inc. (MSI), Marvell Asia Pte Ltd. (MAPL), Marvell Japan K.K. (MJKK), Marvell Semiconductor Israel Ltd. (MSIL), SysKonnect GmbH, and Radlan Computer Communications, Ltd.
+Export Controls.  With respect to any of Marvell’s Information, the user or recipient, in the absence of appropriate U.S. government authorization, agrees: 1) not to re-export or release any such information consisting of technology, software or source code controlled for national security reasons by the U.S. Export Control Regulations ("EAR"), to a national of EAR Country Groups D:1 or E:2; 2) not to export the direct product of such technology or such software, to EAR Country Groups D:1 or E:2, if such technology or software and direct products thereof are controlled for national security reasons by the EAR; and, 3) in the case of technology controlled for national security reasons under the EAR where the direct product of the technology is a complete plant or component of a plant, not to export to EAR Country Groups D:1 or E:2 the direct product of the plant or major component thereof, if such direct product is controlled for national security reasons by the EAR, or is subject to controls under the U.S. Munitions List  ("USML").  At all times hereunder, the recipient of any such information agrees that they shall be deemed to have manually signed this document in connection with their receipt of any such information. 
+Copyright © 2004.  Marvell.  All rights reserved.  Marvell, the Marvell logo, Moving Forward Faster, Alaska, and GalNet are registered trademarks of Marvell.  Discovery, Fastwriter, GalTis, Horizon, Libertas, Link Street, NetGX, PHY Advantage, Prestera, Raising The Technology Bar, UniMAC, Virtual Cable Tester, and Yukon are trademarks of Marvell.  All other trademarks are the property of their respective owners.

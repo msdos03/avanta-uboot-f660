@@ -1,0 +1,102 @@
+; initialize system
+;SYStem.RESet
+
+
+; disable the id check because the cpu does not send the debugger the pattern the debugger expects
+sys.option noircheck on
+    
+; other 946 cpu bug fix seen also on 926
+sys.option MULTIPLESFIX on
+
+ 
+   
+   SYStem.CPU 88FR331
+   SYStem.Option BigEndian OFF
+   
+   ;start debugger. This will also reset the board.
+   SYStem.JtagClock 1MHz
+   SYStem.mode attach
+   SYStem.Up
+
+   SYStem.JtagClock 10MHz
+   Data.Set C15:1 %LONG 0x00052078
+
+    ; dram init
+
+    d.s 0xD0001400 %LONG 0x43000618 ;  DDR SDRAM Configuration Register
+    d.s 0xD0001404 %LONG 0x35143000 ;  Dunit Control Low Register
+    d.s 0xD0001408 %LONG 0x11012227 ;  DDR SDRAM Timing (Low) Register
+    d.s 0xD000140C %LONG 0x00000814 ;  DDR SDRAM Timing (High) Register
+    d.s 0xD0001410 %LONG 0x00000099 ;  DDR SDRAM Address Control Register
+    d.s 0xD0001414 %LONG 0x00000000 ;  DDR SDRAM Open Pages Control Register
+    d.s 0xD0001418 %LONG 0x00000000 ;  DDR SDRAM Operation Register
+    d.s 0xD000141C %LONG 0x00000632 ;  DDR SDRAM Mode Register
+    d.s 0xD0001420 %LONG 0x00000040 ;  DDR SDRAM Extended Mode Register
+    d.s 0xD0001424 %LONG 0x0000F0FF ;  Dunit Control High Register
+    d.s 0xD0001504 %LONG 0x07FFFFF1 ;  CS[0]n Size Register
+    d.s 0xD000150C %LONG 0x00000000 ;  CS[1]n Size Register
+    d.s 0xD0001514 %LONG 0x00000000 ;  CS[2]n Size Register
+    d.s 0xD000151C %LONG 0x00000000 ;  CS[3]n Size Register
+    d.s 0xD0001494 %LONG 0x84210000 ;  DDR2 SDRAM ODT Control (Low) Register
+    d.s 0xD0001498 %LONG 0x00000000 ;  DDR2 SDRAM ODT Control (High) Register
+    d.s 0xD000149C %LONG 0x0000E80F ;  DDR2 Dunit ODT Control Register
+    d.s 0xD0001480 %LONG 0x00000001 ;  DDR SDRAM Initialization Control Register
+    d.s 0xD0020204 %LONG 0x00000000 ;  Main IRQ Interrupt Mask Register
+    d.s 0xD0020204 %LONG 0x00000000 ;              "                   
+    d.s 0xD0020204 %LONG 0x00000000 ;              "                   
+    d.s 0xD0020204 %LONG 0x00000000 ;              "                   
+    d.s 0xD0020204 %LONG 0x00000000 ;              "                   
+    d.s 0xD0020204 %LONG 0x00000000 ;              "                   
+    d.s 0xD0020204 %LONG 0x00000000 ;              "                   
+    d.s 0xD0020204 %LONG 0x00000000 ;              "                   
+    d.s 0xD0020204 %LONG 0x00000000 ;              "                   
+    d.s 0xD0020204 %LONG 0x00000000 ;              "                   
+    d.s 0xD0020204 %LONG 0x00000000 ;              "                   
+    d.s 0xD0020204 %LONG 0x00000000 ;              "                   
+    d.s 0xD0020204 %LONG 0x00000000 ;              "                   
+    d.s 0xD0020204 %LONG 0x00000000 ;              "                   
+    d.s 0xD0020204 %LONG 0x00000000 ;              "                   
+    d.s 0xD0020204 %LONG 0x00000000 ;              "                   
+    d.s 0xD0020204 %LONG 0x00000000 ;              "                   
+    d.s 0xD0020204 %LONG 0x00000000 ;              "                   
+    d.s 0xD0020204 %LONG 0x00000000 ;              "                   
+    d.s 0xD0020204 %LONG 0x00000000 ;              "
+    d.s 0xD0020204 %LONG 0x00000000 ;              "
+    d.s 0xD0020204 %LONG 0x00000000 ;              "
+    d.s 0xD0020204 %LONG 0x00000000 ;              "
+    d.s 0xD0020204 %LONG 0x00000000 ;              "
+    d.s 0xD0020204 %LONG 0x00000000 ;              "
+    d.s 0xD0020204 %LONG 0x00000000 ;              "
+    d.s 0xD0020204 %LONG 0x00000000 ;              "
+    d.s 0xD0020204 %LONG 0x00000000 ;              "
+    d.s 0xD0020204 %LONG 0x00000000 ;              "
+    d.s	0xD0020204 %LONG 0x00000000 ;              "
+    d.s 0xD0020204 %LONG 0x00000000 ;              "
+    d.s 0xD0020204 %LONG 0x00000000 ;              "
+    d.s 0xD0020204 %LONG 0x00000000 ;              "
+    d.s 0xD0020204 %LONG 0x00000000 ;              "
+    d.s 0xD0020204 %LONG 0x00000000 ;              "
+    d.s 0xD0020204 %LONG 0x00000000 ;              "
+    d.s 0xD0020204 %LONG 0x00000000 ;              "
+
+; set program counter at program start
+Register.Set pc 0xFFFF0000
+ 
+; open some windows
+ winpos 0% 0% 100% 50%
+ Data.List
+ winpos 0% 50% 50% 50%
+ SYStem
+ 
+ enddo
+
+
+
+
+
+
+
+
+
+
+
