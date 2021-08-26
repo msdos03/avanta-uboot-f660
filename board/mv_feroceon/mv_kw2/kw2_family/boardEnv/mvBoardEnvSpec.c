@@ -944,7 +944,7 @@ MV_BOARD_INFO sg200_i_Info = {
 	.switchInfoNum = SG200_I_BOARD_SWITCH_NUM,
 
 	/* PON configuration. */
-	.ponConfigValue = BOARD_PON_NONE,
+	.ponConfigValue = BOARD_GPON_CONFIG,
 
 	/* TDM configuration */
 	/* We hold a different configuration array for each possible slic that
