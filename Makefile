@@ -2957,8 +2957,8 @@ sg200_config: unconfig
 	@echo "#define SG200" >> $(obj)include/config.h
 	@echo "#define MV_BOOTSIZE_512K" >> $(obj)include/config.h
 	@echo "#define MV_BOOTROM" >> $(obj)include/config.h
-	@echo "MV_DDR_FREQ=533_512m" >> $(obj)include/config.mk
-	@echo "NAND_TECH=M" >> $(obj)include/config.mk
+	@echo "MV_DDR_FREQ=f660" >> $(obj)include/config.mk
+	@echo "NAND_TECH=S" >> $(obj)include/config.mk
 	@echo "  * Configured for SG200"
 
 	@echo "  * Little Endian byte ordering ";
@@ -2983,9 +2983,9 @@ sg200_config: unconfig
 	@cat sg200_extra.h >> $(obj)include/config.h
 
 
-	@echo "CONFIG_NAND_LP = y" >> $(obj)include/config.mk
-	@echo "  * Large Page NAND support"
-	@echo "BLK_SIZE=128" >> $(obj)include/config.mk
+	@echo "CONFIG_NAND_SP = y" >> $(obj)include/config.mk
+	@echo "  * Small Page NAND support"
+	@echo "BLK_SIZE=16" >> $(obj)include/config.mk
 
 	@echo "#include <configs/mv_kw2.h>" >> $(obj)include/config.h
 
