@@ -260,8 +260,8 @@ extern unsigned int mvTclkGet(void);
 /************/
 /* to change the default ethernet port, use this define (options: 0, 1, 2) */
 #define CONFIG_NET_MULTI
-#define CONFIG_IPADDR		10.4.50.165
-#define CONFIG_SERVERIP		10.4.50.5
+#define CONFIG_IPADDR		192.168.1.1
+#define CONFIG_SERVERIP		192.168.1.100
 #define CONFIG_NETMASK		255.255.255.0
 #define ETHADDR          	"00:00:00:00:51:81"
 #define ETH1ADDR          	"00:00:00:00:51:82"
@@ -326,7 +326,7 @@ extern unsigned int mvTclkGet(void);
 /***************************************/
 #define MV_BOOTARGS_END ":::DB88FXX81:eth0:none"
 #define MV_BOOTARGS_END_SWITCH ":::RD88FXX81:eth0:none"
-#define RCVR_IP_ADDR "169.254.100.100"
+#define RCVR_IP_ADDR "192.168.1.100"
 #define	RCVR_LOAD_ADDR	"0x02000000"
 
 #define CONFIG_ZERO_BOOTDELAY_CHECK
