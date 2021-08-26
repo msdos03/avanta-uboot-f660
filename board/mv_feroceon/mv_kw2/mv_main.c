@@ -671,8 +671,7 @@ ip=$(ipaddr):$(serverip)$(bootargs_end); bootm 0x2000000;");
 
 	/* Set boodelay to 3 sec, if Monitor extension are disabled */
 	if(!enaMonExt()){
-		//setenv("bootdelay","3");
-		setenv("bootdelay","0");
+		setenv("bootdelay","3");
 		setenv("disaMvPnp","no");
 	}
 
@@ -721,9 +720,9 @@ ip=$(ipaddr):$(serverip)$(bootargs_end); bootm 0x2000000;");
 	if(!env)
 		setenv("eth1addr",ethaddr_1);
 
-	//env = getenv("mv_pon_addr");
-	//if(!env)
-		//setenv("mv_pon_addr",pon_addr);
+	env = getenv("mv_pon_addr");
+	if(!env)
+		setenv("mv_pon_addr",pon_addr);
 
 	env = getenv("ethmtu");
 	if(!env)
