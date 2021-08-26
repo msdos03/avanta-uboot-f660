@@ -31,7 +31,7 @@ void sg200_post_init(void)
 
 void sg200_env_init(void)
 {
- setenv("ethprime", "egiga1");
- setenv("ethact", "egiga1");
+ setenv("ethprime", "egiga0");
+ setenv("ethact", "egiga0");
 }
 
