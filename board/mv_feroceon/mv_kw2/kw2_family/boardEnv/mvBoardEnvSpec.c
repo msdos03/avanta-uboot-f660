@@ -861,7 +861,7 @@ MV_BOARD_MAC_INFO sg200_i_InfoBoardMacInfo[] = {
 MV_BOARD_MPP_TYPE_INFO sg200_i_InfoBoardMppTypeInfo[] = {
 	{
 	 .boardMppTdm = MV_BOARD_TDM_2CH, /* XXX */
-	 .ethSataComplexOpt = ESC_OPT_QSGMII | ESC_OPT_MAC0_2_SW_P4 | ESC_OPT_GEPHY_SW_P0 | ESC_OPT_FE3PHY }
+	 .ethSataComplexOpt = ESC_OPT_MAC0_2_SW_P4 | ESC_OPT_GEPHY_SW_P0 | ESC_OPT_FE3PHY }
 };
 
 MV_BOARD_GPP_INFO sg200_i_InfoBoardGppInfo[] = {
