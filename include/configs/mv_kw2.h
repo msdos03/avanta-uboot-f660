@@ -514,7 +514,7 @@ extern unsigned int mvTclkGet(void);
 		#define CONFIG_ENV_IS_IN_NAND
 
 		#define CONFIG_ENV_SIZE				4096		/* environment takes one erase block */
-		#define CONFIG_ENV_OFFSET			SGD_ENV_POS
+		#define CONFIG_ENV_OFFSET			0xC0000
 		#define CONFIG_ENV_ADDR				CONFIG_ENV_OFFSET
 		#define MONITOR_HEADER_LEN			0x200
 		#define CONFIG_SYS_MONITOR_BASE			0

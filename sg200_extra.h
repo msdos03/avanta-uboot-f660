@@ -1,7 +1,6 @@
 
 #define SGD_MODEL_VER "sgd_revision=3A\0"
 #define SGD_FW_VER "sgd_fw=1.0.7\0"
-#define SGD_ENV_POS  0x120000
 #define SGD_MAGIC "sgd_magic=0xc00010\0"
 
 /*   start SG200 extra */
