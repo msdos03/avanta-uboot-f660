@@ -228,24 +228,6 @@ unsigned char yuk_enetaddr[6];
 extern int timer_init(void );
 extern void i2c_init(int speed, int slaveaddr);
 
-#if defined (SG200)
-void sg200_init(int flag)
-{
-        // status led=45 (GPIO MID), power led=68 (GPIO HIGH)
-	if (!flag)
-	{
-         // out enable
-	 * ((unsigned long *) 0xf1018144) = SG200_I_GPP_OUT_ENA_MID;
-	 * ((unsigned long *) 0xf1018184) = SG200_I_GPP_OUT_ENA_HIGH;
-	}
-        // out data
-	* ((unsigned long *) 0xf1018140) &= ~(1 << (45 - 32));
-	* ((unsigned long *) 0xf1018180) &= ~(1 << (68 - 64));
-        // blink for power led, pin 68
-	* ((unsigned long *) 0xf1018188) = 1 << (68 - 64);
-}
-
-#endif
 
 int board_init (void)
 {
@@ -266,10 +248,6 @@ int board_init (void)
 
 	/* must initialize the int in order for udelay to work */
 	//alior interrupt_init();
-
-#if defined (SG200)
-	sg200_init(0);
-#endif
 	timer_init();
 
 	/* Init the Board environment module (device bank params init) */
@@ -292,9 +270,6 @@ int board_init (void)
 	/* Init the GPIO sub-system */
 	gppHalData.ctrlRev = mvCtrlRevGet();
 	mvGppInit(&gppHalData);
-#if defined (SG200)
-	sg200_init(1);
-#endif
 
 	/* arch number of Integrator Board */
 	gd->bd->bi_arch_number = 529; //KW2 arch number
@@ -889,10 +864,7 @@ int misc_init_r (void)
 
 	/* init special env variables */
 	misc_init_r_env();
-#if defined (SG200)
-	extern void sg200_env_init(void);
-	sg200_env_init();
-#endif
+
 	mv_cpu_init();
 
 #if defined(MV_INCLUDE_MONT_EXT)
@@ -930,11 +902,7 @@ int misc_init_r (void)
 	/* Init the PHY or Switch of the board */
 	mvBoardEgigaPhyInit();
 #endif /* #if defined(MV_INCLUDE_UNM_ETH) || defined(MV_INCLUDE_GIG_ETH) */
-	
-#if defined (SG200)
-	extern void sg200_post_init(void);
-	sg200_post_init();
-#endif
+
 	return 0;
 }
 

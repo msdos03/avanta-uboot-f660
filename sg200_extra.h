@@ -8,11 +8,11 @@
 /*
  * Default environment variables
  */
-#define CONFIG_BOOTCOMMAND             "aei_boot"
+#define CONFIG_BOOTCOMMAND             "nand read 2000000 100000 200000;bootm"
 
 /* #define CONFIG_MTDPARTS                "mtdparts=nand:2m(uboot),-(ubi)" */
-#define CONFIG_MTDPARTS "mtdparts=nand:2m(uboot),-(ubi)"
-#define MTDPARTS "2m(uboot),-(ubi)"
+#define CONFIG_MTDPARTS "mtdparts=nand:1m(uboot),-(ubi)"
+#define MTDPARTS "1m(uboot),-(ubi)"
 
 #define CONFIG_EXTRA_ENV_SETTINGS      "mtdids=nand0=nand\0" \
        "ubi_root=active\0" \
@@ -38,8 +38,5 @@
 #define CONFIG_MTD_PARTITIONS
 #define CONFIG_CMD_MTDPARTS
 #define CONFIG_LZO
-
-/* env init */
-#define CONFIG_SG200
 
 /**** End of SG 200 extra */
