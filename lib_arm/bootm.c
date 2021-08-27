@@ -27,9 +27,6 @@
 #include <u-boot/zlib.h>
 #include <asm/byteorder.h>
 
-extern void enable_watchdog(int);
-extern int aei_boardid(void);
-
 DECLARE_GLOBAL_DATA_PTR;
 
 #if defined (CONFIG_SETUP_MEMORY_TAGS) || \
@@ -141,10 +138,8 @@ int do_bootm_linux(int flag, int argc, char *argv[], bootm_headers_t *images)
 
 	cleanup_before_linux ();
 
-	enable_watchdog(2);
 	theKernel (0, machid, bd->bi_boot_params);
 	/* does not return */
-	enable_watchdog(-1);
 
 	return 1;
 }
@@ -263,7 +258,7 @@ extern void mvBoardModuleConfigGet(u32 *modConfig);
 
 static void setup_marvell_tag (void)
 {
-	char *env, *tcp;
+	char *env;
 	char temp[20];
 	int i;
 	unsigned int boardId;
@@ -278,8 +273,7 @@ static void setup_marvell_tag (void)
 	else if(strcmp(getenv("nandEcc"), "1bit") == 0)
 		params->u.mv_uboot.nand_ecc = 1;
 
-	boardId = aei_boardid();
-        //boardId = mvBoardIdGet();
+        boardId = mvBoardIdGet();
 	params->u.mv_uboot.uboot_version |= boardId;
 	params->u.mv_uboot.tclk = CONFIG_SYS_TCLK;
 	params->u.mv_uboot.sysclk = CONFIG_SYS_BUS_CLK;
