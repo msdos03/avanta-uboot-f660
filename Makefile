@@ -2954,6 +2954,7 @@ sg200_config: unconfig
 	@echo "#define MV88F6560" > $(obj)include/config.h 
 	@echo "  * Configured for MV88F6560"
 
+	@echo "#define SG200" >> $(obj)include/config.h
 	@echo "#define MV_BOOTSIZE_512K" >> $(obj)include/config.h
 	@echo "#define MV_BOOTROM" >> $(obj)include/config.h
 	@echo "MV_DDR_FREQ=f660" >> $(obj)include/config.mk
