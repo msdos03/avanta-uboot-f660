@@ -237,7 +237,7 @@ void mvBoardEgigaPhyInit(void)
 				mvEthSWInternalGEPhyBasicInit(1, ethComplex);
 		}
 
-		if (mvBoardIdGet() == RD_88F6560_GW_ID) {
+		if (mvBoardIdGet() == RD_88F6560_GW_ID || mvBoardIdGet() == HGG420N_ID) {
 			/* Config LED Matrix. */
 			reg = MV_REG_READ(LED_MATRIX_CTRL_REG(0));
 			reg |= 0x3;

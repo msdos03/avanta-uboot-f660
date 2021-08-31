@@ -330,7 +330,7 @@ bank0:
 bank1:
  gpio9: net port 1
  gpio10: GPON
- gpio11: iTV (net port 2) (active high)
+ gpio11: iTV (net port 2)
  gpio12: PON signal
  gpio13: voice 1
  gpio14: voice 2
@@ -351,7 +351,7 @@ change the bit to 0 to set GPIO to output*/
 
 /*this section controls the default level of each GPIO*/
 #define HGG420N_GPP_OUT_VAL_LOW  0x01a00000/*you can find it at f1018100*/
-#define HGG420N_GPP_OUT_VAL_MID	 0x1612f600/*you can find it at f1018140*/
+#define HGG420N_GPP_OUT_VAL_MID	 0x1612fe00/*you can find it at f1018140*/
 #define HGG420N_GPP_OUT_VAL_HIGH 0x001b3838/*you can find it at f1018180*/
 
 /*this section controls which GPIO is inverted*/
