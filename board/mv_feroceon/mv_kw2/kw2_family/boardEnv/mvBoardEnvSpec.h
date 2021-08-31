@@ -104,7 +104,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define RD_88F6510_SFU_ID		(BOARD_ID_BASE+0x1)
 #define RD_88F6560_GW_ID		(BOARD_ID_BASE+0x2)
 #define RD_88F6530_MDU_ID		(BOARD_ID_BASE+0x3)
-#define HGG420N_ID                      (BOARD_ID_BASE+0x4)
+#define F660_ID                      (BOARD_ID_BASE+0x4)
 #define DB_CUSTOMER_ID			(BOARD_ID_BASE+0x5)
 #define MV_MAX_BOARD_ID			(DB_CUSTOMER_ID + 1)
 
@@ -309,19 +309,19 @@ MPP#	NAME			IN/OUT
 #define RD_88F6530_GPP_POL_MID		0x0
 #define RD_88F6530_GPP_POL_HIGH		0x0
 
-/* HGG420N */
-#define HGG420N_MPP0_7		0x11111111
-#define HGG420N_MPP8_15		0x31111111
-#define HGG420N_MPP16_23		0x03003303
-#define HGG420N_MPP24_31		0x00022222
-#define HGG420N_MPP32_39		0x00444444
-#define HGG420N_MPP40_47		0x50000000
-#define HGG420N_MPP48_55		0x00000000
-#define HGG420N_MPP56_63		0x90909090
-#define HGG420N_MPP64_71		0x00500900
-#define HGG420N_MPP72_79		0x00000000
-#define HGG420N_MPP80_87		0x00000070
-#define HGG420N_MPP88_88		0x00000000
+/* F660 */
+#define F660_MPP0_7		0x11111111
+#define F660_MPP8_15		0x31111111
+#define F660_MPP16_23		0x03003303
+#define F660_MPP24_31		0x00022222
+#define F660_MPP32_39		0x00444444
+#define F660_MPP40_47		0x50000000
+#define F660_MPP48_55		0x00000000
+#define F660_MPP56_63		0x90909090
+#define F660_MPP64_71		0x00500900
+#define F660_MPP72_79		0x00000000
+#define F660_MPP80_87		0x00000070
+#define F660_MPP88_88		0x00000000
 
 /*
 ZTE F460/F660 GPIO map:
@@ -344,19 +344,19 @@ bank2:
 
 /*this section controls which GPIO is set to output mode
 change the bit to 0 to set GPIO to output*/
-#define HGG420N_GPP_OUT_ENA_LOW 0x80100000/*you can find it at f1018104*/
-#define HGG420N_GPP_OUT_ENA_MID 0x54097820/*you can find it at f1018144*/
-#define HGG420N_GPP_OUT_ENA_HIGH 0x000183ab/*you can find it at f1018184*/
+#define F660_GPP_OUT_ENA_LOW 0x80100000/*you can find it at f1018104*/
+#define F660_GPP_OUT_ENA_MID 0x54097820/*you can find it at f1018144*/
+#define F660_GPP_OUT_ENA_HIGH 0x000183ab/*you can find it at f1018184*/
 
 /*this section controls the default level of each GPIO*/
-#define HGG420N_GPP_OUT_VAL_LOW  0x40220000/*you can find it at f1018100*/
-#define HGG420N_GPP_OUT_VAL_MID	 0x00760000/*you can find it at f1018140*/
-#define HGG420N_GPP_OUT_VAL_HIGH 0x0000f800/*you can find it at f1018180*/
+#define F660_GPP_OUT_VAL_LOW  0x40220000/*you can find it at f1018100*/
+#define F660_GPP_OUT_VAL_MID	 0x00760000/*you can find it at f1018140*/
+#define F660_GPP_OUT_VAL_HIGH 0x0000f800/*you can find it at f1018180*/
 
 /*this section controls which GPIO is inverted*/
-#define HGG420N_GPP_POL_LOW		0x0
-#define HGG420N_GPP_POL_MID		0x0
-#define HGG420N_GPP_POL_HIGH		0x0
+#define F660_GPP_POL_LOW		0x0
+#define F660_GPP_POL_MID		0x0
+#define F660_GPP_POL_HIGH		0x0
 
 
 /* DB-CUSTOMER */

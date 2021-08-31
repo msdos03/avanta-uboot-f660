@@ -29,8 +29,8 @@ do_compile()
 		rd88f6560gw )
 			TEMP="RD-88F6560-GW"
 			;;
-		hgg420n )
-			TEMP="HGG420N"
+		f660 )
+			TEMP="F660"
 			;;
         	* )
 			TEMP="ERROR"
@@ -81,5 +81,5 @@ G_PARAMS="NANDBOOT=1 NAND=1"
 # RD-GW Board #
 ###############
 ##do_compile le rd88f6560gw NAND
-do_compile le hgg420n
+do_compile le f660
 

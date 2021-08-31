@@ -2881,24 +2881,24 @@ endif
 #########################################################################
 
 #########################################################################
-## HQW HGG420N (Marvell KW2 SoC based) System
+## ZTE F660 (Marvell KW2 SoC based) System
 #########################################################################
-hgg420n_config: unconfig
+f660_config: unconfig
 	@mkdir -p $(obj)include
-	@cp board/mv_feroceon/config_kw2/config_hgg420n.mk board/mv_feroceon/config_kw2/config.mk
+	@cp board/mv_feroceon/config_kw2/config_f660.mk board/mv_feroceon/config_kw2/config.mk
 
 	@$(MKCONFIG) -a rd88f6560gw arm arm926ejs config_kw2 mv_feroceon feroceon
-	@echo "MV_OUTPUT = hgg420n" >> $(obj)include/config.mk
+	@echo "MV_OUTPUT = f660" >> $(obj)include/config.mk
 
 	@echo "#define MV88F6560" > $(obj)include/config.h 
 	@echo "  * Configured for MV88F6560"
 
-	@echo "#define HGG420N" >> $(obj)include/config.h
+	@echo "#define F660" >> $(obj)include/config.h
 	@echo "#define MV_BOOTSIZE_512K" >> $(obj)include/config.h
 	@echo "#define MV_BOOTROM" >> $(obj)include/config.h
 	@echo "MV_DDR_FREQ=533_128m" >> $(obj)include/config.mk
 	@echo "NAND_TECH=S" >> $(obj)include/config.mk
-	@echo "  * Configured for HGG420N"
+	@echo "  * Configured for F660"
 
 	@echo "  * Little Endian byte ordering ";
 
@@ -2910,7 +2910,7 @@ hgg420n_config: unconfig
 
 	@echo "#define MV_NAND_BOOT" >> $(obj)include/config.h
 	@echo "NAND_BOOT = y" >> $(obj)include/config.mk
-	@cp board/mv_feroceon/config_kw2/u-boot-sec256k-hgg420n.lds cpu/arm926ejs/u-boot.lds
+	@cp board/mv_feroceon/config_kw2/u-boot-sec256k-f660.lds cpu/arm926ejs/u-boot.lds
 	@echo "  * Boot from NAND support"
 
 	@echo "#define MV_NAND" >> $(obj)include/config.h
@@ -2919,7 +2919,7 @@ hgg420n_config: unconfig
 	@echo "#define MV_LARGE_PAGE" >> $(obj)include/config.h
 
 
-	@cat hgg420n_extra.h >> $(obj)include/config.h
+	@cat f660_extra.h >> $(obj)include/config.h
 
 
 	@echo "CONFIG_NAND_SP = y" >> $(obj)include/config.mk
@@ -2929,7 +2929,7 @@ hgg420n_config: unconfig
 	@echo "#include <configs/mv_kw2.h>" >> $(obj)include/config.h
 
 #########################################################################
-## END of HQW HGG420N System
+## END of ZTE F660 System
 #########################################################################
 
 #########################################################################

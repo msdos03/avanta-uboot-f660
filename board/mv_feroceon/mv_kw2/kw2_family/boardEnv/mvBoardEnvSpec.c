@@ -699,65 +699,65 @@ MV_BOARD_INFO rd88f6530Info = {
 	.pBoardTdmSpiInfo = rd88f6530TdmSpiInfo
 };
 
-/* HGG420N */
-#define HGG420N_BOARD_TWSI_DEF_NUM		0x0
-#define HGG420N_BOARD_SWITCH_NUM		0x1
-#define HGG420N_BOARD_MAC_INFO_NUM		0x2
-#define HGG420N_BOARD_GPP_INFO_NUM		0x0
-#define HGG420N_BOARD_MPP_CONFIG_NUM		0x1
-#define HGG420N_BOARD_MPP_GROUP_TYPE_NUM	0x1
-#define HGG420N_BOARD_DEVICE_CONFIG_NUM	0x1
+/* F660 */
+#define F660_BOARD_TWSI_DEF_NUM		0x0
+#define F660_BOARD_SWITCH_NUM		0x1
+#define F660_BOARD_MAC_INFO_NUM		0x2
+#define F660_BOARD_GPP_INFO_NUM		0x0
+#define F660_BOARD_MPP_CONFIG_NUM		0x1
+#define F660_BOARD_MPP_GROUP_TYPE_NUM	0x1
+#define F660_BOARD_DEVICE_CONFIG_NUM	0x1
 
-#define HGG420N_BOARD_DEBUG_LED_NUM		0x0
+#define F660_BOARD_DEBUG_LED_NUM		0x0
 
-#define HGG420N_BOARD_NAND_READ_PARAMS	0x000C0282
-#define HGG420N_BOARD_NAND_WRITE_PARAMS	0x00010305
+#define F660_BOARD_NAND_READ_PARAMS	0x000C0282
+#define F660_BOARD_NAND_WRITE_PARAMS	0x00010305
 /* NAND care support for small page chips */
-#define HGG420N_BOARD_NAND_CONTROL		0x01c00543
+#define F660_BOARD_NAND_CONTROL		0x01c00543
 
-MV_BOARD_TWSI_INFO hgg420n_InfoBoardTwsiDev[] = {
+MV_BOARD_TWSI_INFO f660_InfoBoardTwsiDev[] = {
 	/* {{MV_BOARD_DEV_CLASS devClass, MV_U8 twsiDevAddr, MV_U8 twsiDevAddrType}} */
 };
 
-MV_BOARD_MAC_INFO hgg420n_InfoBoardMacInfo[] = {
+MV_BOARD_MAC_INFO f660_InfoBoardMacInfo[] = {
 	/* {{MV_BOARD_MAC_SPEED boardMacSpeed, MV_U8 boardEthSmiAddr}} */
 	{BOARD_MAC_SPEED_1000M, 0x8},
 	{BOARD_MAC_SPEED_AUTO, 0x9}
 };
 
-MV_BOARD_MPP_TYPE_INFO hgg420n_InfoBoardMppTypeInfo[] = {
+MV_BOARD_MPP_TYPE_INFO f660_InfoBoardMppTypeInfo[] = {
 	{
 	 .boardMppTdm = MV_BOARD_TDM_2CH, /* XXX */
 	 .ethSataComplexOpt = ESC_OPT_MAC0_2_SW_P4 | ESC_OPT_GEPHY_SW_P0 | ESC_OPT_FE3PHY }
 };
 
-MV_BOARD_GPP_INFO hgg420n_InfoBoardGppInfo[] = {
+MV_BOARD_GPP_INFO f660_InfoBoardGppInfo[] = {
 	/* {{MV_BOARD_GPP_CLASS devClass, MV_U8 gppPinNum}} */
 };
 
-MV_DEV_CS_INFO hgg420n_InfoBoardDeCsInfo[] = {
+MV_DEV_CS_INFO f660_InfoBoardDeCsInfo[] = {
 	{NAND_NOR_CS, N_A, BOARD_DEV_NAND_FLASH, 8}
 };
 
-MV_BOARD_MPP_INFO hgg420n_InfoBoardMppConfigValue[] = {
+MV_BOARD_MPP_INFO f660_InfoBoardMppConfigValue[] = {
 	{{
-	  HGG420N_MPP0_7,
-	  HGG420N_MPP8_15,
-	  HGG420N_MPP16_23,
-	  HGG420N_MPP24_31,
-	  HGG420N_MPP32_39,
-	  HGG420N_MPP40_47,
-	  HGG420N_MPP48_55,
-	  HGG420N_MPP56_63,
-	  HGG420N_MPP64_71,
-	  HGG420N_MPP72_79,
-	  HGG420N_MPP80_87,
-	  HGG420N_MPP88_88
+	  F660_MPP0_7,
+	  F660_MPP8_15,
+	  F660_MPP16_23,
+	  F660_MPP24_31,
+	  F660_MPP32_39,
+	  F660_MPP40_47,
+	  F660_MPP48_55,
+	  F660_MPP56_63,
+	  F660_MPP64_71,
+	  F660_MPP72_79,
+	  F660_MPP80_87,
+	  F660_MPP88_88
 	  }
 	 }
 };
 
-MV_BOARD_SWITCH_INFO hgg420n_InfoBoardSwitchValue[] = {
+MV_BOARD_SWITCH_INFO f660_InfoBoardSwitchValue[] = {
 	{
 	 .switchIrq = 29,	/* set to -1 for timer operation */
 	 .switchPort = {1, 2, 3, 0, -1, -1, -1, -1},
@@ -768,47 +768,47 @@ MV_BOARD_SWITCH_INFO hgg420n_InfoBoardSwitchValue[] = {
 	 }
 };
 
-MV_U8 hgg420n_LedGppPin[] = { };
+MV_U8 f660_LedGppPin[] = { };
 
-MV_BOARD_TDM_INFO hgg420n_Tdm880[] = { };
+MV_BOARD_TDM_INFO f660_Tdm880[] = { };
 
-MV_BOARD_TDM_SPI_INFO hgg420n_TdmSpiInfo[] = { };
+MV_BOARD_TDM_SPI_INFO f660_TdmSpiInfo[] = { };
 
-MV_BOARD_INFO hgg420n_Info = {
-	.boardName = "HGG420N",
-	.numBoardMppTypeValue = HGG420N_BOARD_MPP_GROUP_TYPE_NUM,
-	.pBoardMppTypeValue = hgg420n_InfoBoardMppTypeInfo,
-	.numBoardMppConfigValue = HGG420N_BOARD_MPP_CONFIG_NUM,
-	.pBoardMppConfigValue = hgg420n_InfoBoardMppConfigValue,
+MV_BOARD_INFO f660_Info = {
+	.boardName = "F660",
+	.numBoardMppTypeValue = F660_BOARD_MPP_GROUP_TYPE_NUM,
+	.pBoardMppTypeValue = f660_InfoBoardMppTypeInfo,
+	.numBoardMppConfigValue = F660_BOARD_MPP_CONFIG_NUM,
+	.pBoardMppConfigValue = f660_InfoBoardMppConfigValue,
 	.intsGppMaskLow = 0,
 	.intsGppMaskMid = 0,
 	.intsGppMaskHigh = 0,
-	.numBoardDeviceIf = HGG420N_BOARD_DEVICE_CONFIG_NUM,
-	.pDevCsInfo = hgg420n_InfoBoardDeCsInfo,
-	.numBoardTwsiDev = HGG420N_BOARD_TWSI_DEF_NUM,
-	.pBoardTwsiDev = hgg420n_InfoBoardTwsiDev,
-	.numBoardMacInfo = HGG420N_BOARD_MAC_INFO_NUM,
-	.pBoardMacInfo = hgg420n_InfoBoardMacInfo,
-	.numBoardGppInfo = HGG420N_BOARD_GPP_INFO_NUM,
-	.pBoardGppInfo = hgg420n_InfoBoardGppInfo,
-	.activeLedsNumber = HGG420N_BOARD_DEBUG_LED_NUM,
-	.pLedGppPin = hgg420n_LedGppPin,
+	.numBoardDeviceIf = F660_BOARD_DEVICE_CONFIG_NUM,
+	.pDevCsInfo = f660_InfoBoardDeCsInfo,
+	.numBoardTwsiDev = F660_BOARD_TWSI_DEF_NUM,
+	.pBoardTwsiDev = f660_InfoBoardTwsiDev,
+	.numBoardMacInfo = F660_BOARD_MAC_INFO_NUM,
+	.pBoardMacInfo = f660_InfoBoardMacInfo,
+	.numBoardGppInfo = F660_BOARD_GPP_INFO_NUM,
+	.pBoardGppInfo = f660_InfoBoardGppInfo,
+	.activeLedsNumber = F660_BOARD_DEBUG_LED_NUM,
+	.pLedGppPin = f660_LedGppPin,
 	.ledsPolarity = 0,
 
 	/* GPP values */
-	.gppOutEnValLow = HGG420N_GPP_OUT_ENA_LOW,
-	.gppOutEnValMid = HGG420N_GPP_OUT_ENA_MID,
-	.gppOutEnValHigh = HGG420N_GPP_OUT_ENA_HIGH,
-	.gppOutValLow = HGG420N_GPP_OUT_VAL_LOW,
-	.gppOutValMid = HGG420N_GPP_OUT_VAL_MID,
-	.gppOutValHigh = HGG420N_GPP_OUT_VAL_HIGH,
-	.gppPolarityValLow = HGG420N_GPP_POL_LOW,
-	.gppPolarityValMid = HGG420N_GPP_POL_MID,
-	.gppPolarityValHigh = HGG420N_GPP_POL_HIGH,
+	.gppOutEnValLow = F660_GPP_OUT_ENA_LOW,
+	.gppOutEnValMid = F660_GPP_OUT_ENA_MID,
+	.gppOutEnValHigh = F660_GPP_OUT_ENA_HIGH,
+	.gppOutValLow = F660_GPP_OUT_VAL_LOW,
+	.gppOutValMid = F660_GPP_OUT_VAL_MID,
+	.gppOutValHigh = F660_GPP_OUT_VAL_HIGH,
+	.gppPolarityValLow = F660_GPP_POL_LOW,
+	.gppPolarityValMid = F660_GPP_POL_MID,
+	.gppPolarityValHigh = F660_GPP_POL_HIGH,
 
 	/* External Switch Configuration */
-	.pSwitchInfo = hgg420n_InfoBoardSwitchValue,
-	.switchInfoNum = HGG420N_BOARD_SWITCH_NUM,
+	.pSwitchInfo = f660_InfoBoardSwitchValue,
+	.switchInfoNum = F660_BOARD_SWITCH_NUM,
 
 	/* PON configuration. */
 	.ponConfigValue = BOARD_GPON_CONFIG,
@@ -822,14 +822,14 @@ MV_BOARD_INFO hgg420n_Info = {
 	 ** entry of the arrays below, and set the boardTdmInfoIndex to 0.
 	 */
 	.numBoardTdmInfo = {},
-	.pBoardTdmInt2CsInfo = { hgg420n_Tdm880 },
+	.pBoardTdmInt2CsInfo = { f660_Tdm880 },
 	.boardTdmInfoIndex = -1,
 
 	/* NAND init params */
-	.nandFlashReadParams = HGG420N_BOARD_NAND_READ_PARAMS,
-	.nandFlashWriteParams = HGG420N_BOARD_NAND_WRITE_PARAMS,
-	.nandFlashControl = HGG420N_BOARD_NAND_CONTROL,
-	.pBoardTdmSpiInfo = hgg420n_TdmSpiInfo
+	.nandFlashReadParams = F660_BOARD_NAND_READ_PARAMS,
+	.nandFlashWriteParams = F660_BOARD_NAND_WRITE_PARAMS,
+	.nandFlashControl = F660_BOARD_NAND_CONTROL,
+	.pBoardTdmSpiInfo = f660_TdmSpiInfo
 };
 
 
@@ -894,6 +894,6 @@ MV_BOARD_INFO *boardInfoTbl[] = {
 	&rd88f6510Info,
 	&rd88f6560Info,
 	&rd88f6530Info,
-	&hgg420n_Info,
+	&f660_Info,
 	&dbCustomerInfo
 };
