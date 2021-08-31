@@ -352,14 +352,38 @@ MPP#	NAME			IN/OUT
 #define SG200_I_MPP80_87		0x00000000
 #define SG200_I_MPP88_88		0x00000000
 
-#define SG200_I_GPP_OUT_ENA_LOW 0x80080000
-#define SG200_I_GPP_OUT_ENA_MID 0x69390000
-#define SG200_I_GPP_OUT_ENA_HIGH 0x00000100
+/*
+HGG420N GPIO map:
+bank0:
+ gpio23: net port 3
+bank1:
+ gpio9: net port 1
+ gpio10: GPON
+ gpio11: iTV (net port 2) (active high)
+ gpio12: PON signal
+ gpio13: voice 1
+ gpio14: voice 2
+ gpio15: network
+ gpio17: net port 4
+ gpio25: USB
+ gpio26: power (active high)
+ gpio28: WPS (red)
+bank2:
+ gpio16: WPS (green)
+*/
 
-#define SG200_I_GPP_OUT_VAL_LOW  0x01a00000
-#define SG200_I_GPP_OUT_VAL_MID	 0x1612f600
-#define SG200_I_GPP_OUT_VAL_HIGH 0x001b3838
+/*this section controls which GPIO is set to output mode
+change the bit to 0 to set GPIO to output*/
+#define SG200_I_GPP_OUT_ENA_LOW 0x80080000/*you can find it at f1018104*/
+#define SG200_I_GPP_OUT_ENA_MID 0x69390000/*you can find it at f1018144*/
+#define SG200_I_GPP_OUT_ENA_HIGH 0x00000100/*you can find it at f1018184*/
 
+/*this section controls the default level of each GPIO*/
+#define SG200_I_GPP_OUT_VAL_LOW  0x01a00000/*you can find it at f1018100*/
+#define SG200_I_GPP_OUT_VAL_MID	 0x1612f600/*you can find it at f1018140*/
+#define SG200_I_GPP_OUT_VAL_HIGH 0x001b3838/*you can find it at f1018180*/
+
+/*this section controls which GPIO is inverted*/
 #define SG200_I_GPP_POL_LOW		0x0
 #define SG200_I_GPP_POL_MID		0x0
 #define SG200_I_GPP_POL_HIGH		0x0
