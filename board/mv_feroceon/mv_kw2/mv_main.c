@@ -716,7 +716,7 @@ ip=$(ipaddr):$(serverip)$(bootargs_end); bootm 0x2000000;");
 			case RD_88F6530_MDU_ID:
 				setenv("mvNetConfig","mv_net_config=0");
 			break;
-			case SG200_ID:
+			case HGG420N_ID:
 				setenv("mvNetConfig","mv_net_config=1,(00:50:43:11:11:11,0:1:2:3),mtu=1500");
 			break;
 			case RD_88F6560_GW_ID:

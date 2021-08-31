@@ -300,10 +300,6 @@ MV_VOID mvEthKW2SwitchBasicInit(MV_U32 enabledPorts)
 
 		/* Force link, speed, duplex for switch port #4. */
 		mvEthSwitchRegWrite(0, 0x14, 0x1, 0x3E);
-		if (mvBoardIdGet() == MI424WR_I_ID)
-			/* MI424-I Specific */
-			/* Force link, speed, duplex for switch port #6. */
-			mvEthSwitchRegWrite(0, 0x16, 0x1, 0x3E);
 	}
 	else 
 	{
@@ -312,10 +308,6 @@ MV_VOID mvEthKW2SwitchBasicInit(MV_U32 enabledPorts)
 		cpuPort = 5;
 		/* Force link, speed, duplex for switch port #4. */
 		mvEthSwitchRegWrite(1, 0x15, 0x1, 0x3E);
-		if (mvBoardIdGet() == MI424WR_I_ID)
-			/* MI424-I Specific */
-			/* Force link, speed, duplex for switch port #6. */
-			mvEthSwitchRegWrite(0, 0x16, 0x1, 0x3E);
 	}
 //	enabledPorts |= (1 << cpuPort);
 

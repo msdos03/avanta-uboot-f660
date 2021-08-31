@@ -32,8 +32,8 @@ do_compile()
 		rd88f6560gw )
 			TEMP="RD-88F6560-GW"
 			;;
-		sg200 )
-			TEMP="SG200"
+		hgg420n )
+			TEMP="HGG420N"
 			;;
         	* )
 			TEMP="ERROR"
@@ -44,7 +44,7 @@ do_compile()
 	export CROSS_COMPILE=$COMPILER
 	make mrproper
 	make $BOARD"_config" $PARAMS $ENDIAN
-	make -j3 -s >> log.txt
+	make -s >> log.txt
 	mkdir -p $TAR_DIR
 	cp u-boot-$BOARD* $TAR_DIR/
 	rm $TAR_DIR/*.srec
@@ -97,5 +97,5 @@ G_PARAMS="NANDBOOT=1 NAND=1"
 # RD-GW Board #
 ###############
 ##do_compile le rd88f6560gw NAND
-do_compile le sg200 NAND
+do_compile le hgg420n NAND
 

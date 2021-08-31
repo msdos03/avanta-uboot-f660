@@ -699,198 +699,65 @@ MV_BOARD_INFO rd88f6530Info = {
 	.pBoardTdmSpiInfo = rd88f6530TdmSpiInfo
 };
 
-/* MI424WR-I */
-#define MI424WR_I_BOARD_TWSI_DEF_NUM		0x0
-#define MI424WR_I_BOARD_SWITCH_NUM		0x1
-#define MI424WR_I_BOARD_MAC_INFO_NUM		0x2
-#define MI424WR_I_BOARD_GPP_INFO_NUM		0x0
-#define MI424WR_I_BOARD_MPP_CONFIG_NUM		0x1
-#define MI424WR_I_BOARD_MPP_GROUP_TYPE_NUM	0x1
-#define MI424WR_I_BOARD_DEVICE_CONFIG_NUM	0x1
+/* HGG420N */
+#define HGG420N_BOARD_TWSI_DEF_NUM		0x0
+#define HGG420N_BOARD_SWITCH_NUM		0x1
+#define HGG420N_BOARD_MAC_INFO_NUM		0x2
+#define HGG420N_BOARD_GPP_INFO_NUM		0x0
+#define HGG420N_BOARD_MPP_CONFIG_NUM		0x1
+#define HGG420N_BOARD_MPP_GROUP_TYPE_NUM	0x1
+#define HGG420N_BOARD_DEVICE_CONFIG_NUM	0x1
 
-#define MI424WR_I_BOARD_DEBUG_LED_NUM		0x0
+#define HGG420N_BOARD_DEBUG_LED_NUM		0x0
 
-#define MI424WR_I_BOARD_NAND_READ_PARAMS	0x000C0282
-#define MI424WR_I_BOARD_NAND_WRITE_PARAMS	0x00010305
+#define HGG420N_BOARD_NAND_READ_PARAMS	0x000C0282
+#define HGG420N_BOARD_NAND_WRITE_PARAMS	0x00010305
 /* NAND care support for small page chips */
-#define MI424WR_I_BOARD_NAND_CONTROL		0x01c00543
+#define HGG420N_BOARD_NAND_CONTROL		0x01c00543
 
-MV_BOARD_TWSI_INFO mi424wr_i_InfoBoardTwsiDev[] = {
+MV_BOARD_TWSI_INFO hgg420n_InfoBoardTwsiDev[] = {
 	/* {{MV_BOARD_DEV_CLASS devClass, MV_U8 twsiDevAddr, MV_U8 twsiDevAddrType}} */
 };
 
-MV_BOARD_MAC_INFO mi424wr_i_InfoBoardMacInfo[] = {
+MV_BOARD_MAC_INFO hgg420n_InfoBoardMacInfo[] = {
 	/* {{MV_BOARD_MAC_SPEED boardMacSpeed, MV_U8 boardEthSmiAddr}} */
 	{BOARD_MAC_SPEED_1000M, 0x8},
 	{BOARD_MAC_SPEED_AUTO, 0x9}
 };
 
-MV_BOARD_MPP_TYPE_INFO mi424wr_i_InfoBoardMppTypeInfo[] = {
-	{
-	 .boardMppTdm = MV_BOARD_TDM_2CH, /* XXX */
-	 .ethSataComplexOpt = ESC_OPT_QSGMII | ESC_OPT_GEPHY_MAC1 | ESC_OPT_MAC0_2_SW_P4 | ESC_OPT_RGMIIA_SW_P6}
-};
-
-MV_BOARD_GPP_INFO mi424wr_i_InfoBoardGppInfo[] = {
-	/* {{MV_BOARD_GPP_CLASS devClass, MV_U8 gppPinNum}} */
-};
-
-MV_DEV_CS_INFO mi424wr_i_InfoBoardDeCsInfo[] = {
-	{BOOT_CS, N_A, BOARD_DEV_NAND_FLASH, 8}
-};
-
-MV_BOARD_MPP_INFO mi424wr_i_InfoBoardMppConfigValue[] = {
-	{{
-	  MI424WR_I_MPP0_7,
-	  MI424WR_I_MPP8_15,
-	  MI424WR_I_MPP16_23,
-	  MI424WR_I_MPP24_31,
-	  MI424WR_I_MPP32_39,
-	  MI424WR_I_MPP40_47,
-	  MI424WR_I_MPP48_55,
-	  MI424WR_I_MPP56_63,
-	  MI424WR_I_MPP64_71,
-	  MI424WR_I_MPP72_79,
-	  MI424WR_I_MPP80_87,
-	  MI424WR_I_MPP88_88
-	  }
-	 }
-};
-
-MV_BOARD_SWITCH_INFO mi424wr_i_InfoBoardSwitchValue[] = {
-	{
-	 .switchIrq = 29,	/* set to -1 for timer operation */
-	 .switchPort = {1, 2, 3, 0, -1, -1, -1, -1},
-	 .cpuPort = 4,
-	 .connectedPort = {4, -1, -1},
-	 .smiScanMode = 2,
-	 .quadPhyAddr = 0
-	 }
-};
-
-MV_U8 mi424wr_i_LedGppPin[] = { };
-
-MV_BOARD_TDM_INFO mi424wr_i_Tdm880[] = { };
-
-MV_BOARD_TDM_SPI_INFO mi424wr_i_TdmSpiInfo[] = { };
-
-MV_BOARD_INFO mi424wr_i_Info = {
-	.boardName = "MI424WR-I",
-	.numBoardMppTypeValue = MI424WR_I_BOARD_MPP_GROUP_TYPE_NUM,
-	.pBoardMppTypeValue = mi424wr_i_InfoBoardMppTypeInfo,
-	.numBoardMppConfigValue = MI424WR_I_BOARD_MPP_CONFIG_NUM,
-	.pBoardMppConfigValue = mi424wr_i_InfoBoardMppConfigValue,
-	.intsGppMaskLow = 0,
-	.intsGppMaskMid = 0,
-	.intsGppMaskHigh = 0,
-	.numBoardDeviceIf = MI424WR_I_BOARD_DEVICE_CONFIG_NUM,
-	.pDevCsInfo = mi424wr_i_InfoBoardDeCsInfo,
-	.numBoardTwsiDev = MI424WR_I_BOARD_TWSI_DEF_NUM,
-	.pBoardTwsiDev = mi424wr_i_InfoBoardTwsiDev,
-	.numBoardMacInfo = MI424WR_I_BOARD_MAC_INFO_NUM,
-	.pBoardMacInfo = mi424wr_i_InfoBoardMacInfo,
-	.numBoardGppInfo = MI424WR_I_BOARD_GPP_INFO_NUM,
-	.pBoardGppInfo = mi424wr_i_InfoBoardGppInfo,
-	.activeLedsNumber = MI424WR_I_BOARD_DEBUG_LED_NUM,
-	.pLedGppPin = mi424wr_i_LedGppPin,
-	.ledsPolarity = 0,
-
-	/* GPP values */
-	.gppOutEnValLow = MI424WR_I_GPP_OUT_ENA_LOW,
-	.gppOutEnValMid = MI424WR_I_GPP_OUT_ENA_MID,
-	.gppOutEnValHigh = MI424WR_I_GPP_OUT_ENA_HIGH,
-	.gppOutValLow = MI424WR_I_GPP_OUT_VAL_LOW,
-	.gppOutValMid = MI424WR_I_GPP_OUT_VAL_MID,
-	.gppOutValHigh = MI424WR_I_GPP_OUT_VAL_HIGH,
-	.gppPolarityValLow = MI424WR_I_GPP_POL_LOW,
-	.gppPolarityValMid = MI424WR_I_GPP_POL_MID,
-	.gppPolarityValHigh = MI424WR_I_GPP_POL_HIGH,
-
-	/* External Switch Configuration */
-	.pSwitchInfo = mi424wr_i_InfoBoardSwitchValue,
-	.switchInfoNum = MI424WR_I_BOARD_SWITCH_NUM,
-
-	/* PON configuration. */
-	.ponConfigValue = BOARD_PON_NONE,
-
-	/* TDM configuration */
-	/* We hold a different configuration array for each possible slic that
-	 ** can be connected to board.
-	 ** When modules are scanned, then we select the index of the relevant
-	 ** slic's information array.
-	 ** For RD and Customers boards we only need to initialize a single
-	 ** entry of the arrays below, and set the boardTdmInfoIndex to 0.
-	 */
-	.numBoardTdmInfo = {},
-	.pBoardTdmInt2CsInfo = { mi424wr_i_Tdm880 },
-	.boardTdmInfoIndex = -1,
-
-	/* NAND init params */
-	.nandFlashReadParams = MI424WR_I_BOARD_NAND_READ_PARAMS,
-	.nandFlashWriteParams = MI424WR_I_BOARD_NAND_WRITE_PARAMS,
-	.nandFlashControl = MI424WR_I_BOARD_NAND_CONTROL,
-	.pBoardTdmSpiInfo = mi424wr_i_TdmSpiInfo
-};
-
-/* SG200 */
-#define SG200_I_BOARD_TWSI_DEF_NUM		0x0
-#define SG200_I_BOARD_SWITCH_NUM		0x1
-#define SG200_I_BOARD_MAC_INFO_NUM		0x2
-#define SG200_I_BOARD_GPP_INFO_NUM		0x0
-#define SG200_I_BOARD_MPP_CONFIG_NUM		0x1
-#define SG200_I_BOARD_MPP_GROUP_TYPE_NUM	0x1
-#define SG200_I_BOARD_DEVICE_CONFIG_NUM	0x1
-
-#define SG200_I_BOARD_DEBUG_LED_NUM		0x0
-
-#define SG200_I_BOARD_NAND_READ_PARAMS	0x000C0282
-#define SG200_I_BOARD_NAND_WRITE_PARAMS	0x00010305
-/* NAND care support for small page chips */
-#define SG200_I_BOARD_NAND_CONTROL		0x01c00543
-
-MV_BOARD_TWSI_INFO sg200_i_InfoBoardTwsiDev[] = {
-	/* {{MV_BOARD_DEV_CLASS devClass, MV_U8 twsiDevAddr, MV_U8 twsiDevAddrType}} */
-};
-
-MV_BOARD_MAC_INFO sg200_i_InfoBoardMacInfo[] = {
-	/* {{MV_BOARD_MAC_SPEED boardMacSpeed, MV_U8 boardEthSmiAddr}} */
-	{BOARD_MAC_SPEED_1000M, 0x8},
-	{BOARD_MAC_SPEED_AUTO, 0x9}
-};
-
-MV_BOARD_MPP_TYPE_INFO sg200_i_InfoBoardMppTypeInfo[] = {
+MV_BOARD_MPP_TYPE_INFO hgg420n_InfoBoardMppTypeInfo[] = {
 	{
 	 .boardMppTdm = MV_BOARD_TDM_2CH, /* XXX */
 	 .ethSataComplexOpt = ESC_OPT_MAC0_2_SW_P4 | ESC_OPT_GEPHY_SW_P0 | ESC_OPT_FE3PHY }
 };
 
-MV_BOARD_GPP_INFO sg200_i_InfoBoardGppInfo[] = {
+MV_BOARD_GPP_INFO hgg420n_InfoBoardGppInfo[] = {
 	/* {{MV_BOARD_GPP_CLASS devClass, MV_U8 gppPinNum}} */
 };
 
-MV_DEV_CS_INFO sg200_i_InfoBoardDeCsInfo[] = {
+MV_DEV_CS_INFO hgg420n_InfoBoardDeCsInfo[] = {
 	{NAND_NOR_CS, N_A, BOARD_DEV_NAND_FLASH, 8}
 };
 
-MV_BOARD_MPP_INFO sg200_i_InfoBoardMppConfigValue[] = {
+MV_BOARD_MPP_INFO hgg420n_InfoBoardMppConfigValue[] = {
 	{{
-	  SG200_I_MPP0_7,
-	  SG200_I_MPP8_15,
-	  SG200_I_MPP16_23,
-	  SG200_I_MPP24_31,
-	  SG200_I_MPP32_39,
-	  SG200_I_MPP40_47,
-	  SG200_I_MPP48_55,
-	  SG200_I_MPP56_63,
-	  SG200_I_MPP64_71,
-	  SG200_I_MPP72_79,
-	  SG200_I_MPP80_87,
-	  SG200_I_MPP88_88
+	  HGG420N_MPP0_7,
+	  HGG420N_MPP8_15,
+	  HGG420N_MPP16_23,
+	  HGG420N_MPP24_31,
+	  HGG420N_MPP32_39,
+	  HGG420N_MPP40_47,
+	  HGG420N_MPP48_55,
+	  HGG420N_MPP56_63,
+	  HGG420N_MPP64_71,
+	  HGG420N_MPP72_79,
+	  HGG420N_MPP80_87,
+	  HGG420N_MPP88_88
 	  }
 	 }
 };
 
-MV_BOARD_SWITCH_INFO sg200_i_InfoBoardSwitchValue[] = {
+MV_BOARD_SWITCH_INFO hgg420n_InfoBoardSwitchValue[] = {
 	{
 	 .switchIrq = 29,	/* set to -1 for timer operation */
 	 .switchPort = {1, 2, 3, 0, -1, -1, -1, -1},
@@ -901,47 +768,47 @@ MV_BOARD_SWITCH_INFO sg200_i_InfoBoardSwitchValue[] = {
 	 }
 };
 
-MV_U8 sg200_i_LedGppPin[] = { };
+MV_U8 hgg420n_LedGppPin[] = { };
 
-MV_BOARD_TDM_INFO sg200_i_Tdm880[] = { };
+MV_BOARD_TDM_INFO hgg420n_Tdm880[] = { };
 
-MV_BOARD_TDM_SPI_INFO sg200_i_TdmSpiInfo[] = { };
+MV_BOARD_TDM_SPI_INFO hgg420n_TdmSpiInfo[] = { };
 
-MV_BOARD_INFO sg200_i_Info = {
-	.boardName = "SG200",
-	.numBoardMppTypeValue = SG200_I_BOARD_MPP_GROUP_TYPE_NUM,
-	.pBoardMppTypeValue = sg200_i_InfoBoardMppTypeInfo,
-	.numBoardMppConfigValue = SG200_I_BOARD_MPP_CONFIG_NUM,
-	.pBoardMppConfigValue = sg200_i_InfoBoardMppConfigValue,
+MV_BOARD_INFO hgg420n_Info = {
+	.boardName = "HGG420N",
+	.numBoardMppTypeValue = HGG420N_BOARD_MPP_GROUP_TYPE_NUM,
+	.pBoardMppTypeValue = hgg420n_InfoBoardMppTypeInfo,
+	.numBoardMppConfigValue = HGG420N_BOARD_MPP_CONFIG_NUM,
+	.pBoardMppConfigValue = hgg420n_InfoBoardMppConfigValue,
 	.intsGppMaskLow = 0,
 	.intsGppMaskMid = 0,
 	.intsGppMaskHigh = 0,
-	.numBoardDeviceIf = SG200_I_BOARD_DEVICE_CONFIG_NUM,
-	.pDevCsInfo = sg200_i_InfoBoardDeCsInfo,
-	.numBoardTwsiDev = SG200_I_BOARD_TWSI_DEF_NUM,
-	.pBoardTwsiDev = sg200_i_InfoBoardTwsiDev,
-	.numBoardMacInfo = SG200_I_BOARD_MAC_INFO_NUM,
-	.pBoardMacInfo = sg200_i_InfoBoardMacInfo,
-	.numBoardGppInfo = SG200_I_BOARD_GPP_INFO_NUM,
-	.pBoardGppInfo = sg200_i_InfoBoardGppInfo,
-	.activeLedsNumber = SG200_I_BOARD_DEBUG_LED_NUM,
-	.pLedGppPin = sg200_i_LedGppPin,
+	.numBoardDeviceIf = HGG420N_BOARD_DEVICE_CONFIG_NUM,
+	.pDevCsInfo = hgg420n_InfoBoardDeCsInfo,
+	.numBoardTwsiDev = HGG420N_BOARD_TWSI_DEF_NUM,
+	.pBoardTwsiDev = hgg420n_InfoBoardTwsiDev,
+	.numBoardMacInfo = HGG420N_BOARD_MAC_INFO_NUM,
+	.pBoardMacInfo = hgg420n_InfoBoardMacInfo,
+	.numBoardGppInfo = HGG420N_BOARD_GPP_INFO_NUM,
+	.pBoardGppInfo = hgg420n_InfoBoardGppInfo,
+	.activeLedsNumber = HGG420N_BOARD_DEBUG_LED_NUM,
+	.pLedGppPin = hgg420n_LedGppPin,
 	.ledsPolarity = 0,
 
 	/* GPP values */
-	.gppOutEnValLow = SG200_I_GPP_OUT_ENA_LOW,
-	.gppOutEnValMid = SG200_I_GPP_OUT_ENA_MID,
-	.gppOutEnValHigh = SG200_I_GPP_OUT_ENA_HIGH,
-	.gppOutValLow = SG200_I_GPP_OUT_VAL_LOW,
-	.gppOutValMid = SG200_I_GPP_OUT_VAL_MID,
-	.gppOutValHigh = SG200_I_GPP_OUT_VAL_HIGH,
-	.gppPolarityValLow = SG200_I_GPP_POL_LOW,
-	.gppPolarityValMid = SG200_I_GPP_POL_MID,
-	.gppPolarityValHigh = SG200_I_GPP_POL_HIGH,
+	.gppOutEnValLow = HGG420N_GPP_OUT_ENA_LOW,
+	.gppOutEnValMid = HGG420N_GPP_OUT_ENA_MID,
+	.gppOutEnValHigh = HGG420N_GPP_OUT_ENA_HIGH,
+	.gppOutValLow = HGG420N_GPP_OUT_VAL_LOW,
+	.gppOutValMid = HGG420N_GPP_OUT_VAL_MID,
+	.gppOutValHigh = HGG420N_GPP_OUT_VAL_HIGH,
+	.gppPolarityValLow = HGG420N_GPP_POL_LOW,
+	.gppPolarityValMid = HGG420N_GPP_POL_MID,
+	.gppPolarityValHigh = HGG420N_GPP_POL_HIGH,
 
 	/* External Switch Configuration */
-	.pSwitchInfo = sg200_i_InfoBoardSwitchValue,
-	.switchInfoNum = SG200_I_BOARD_SWITCH_NUM,
+	.pSwitchInfo = hgg420n_InfoBoardSwitchValue,
+	.switchInfoNum = HGG420N_BOARD_SWITCH_NUM,
 
 	/* PON configuration. */
 	.ponConfigValue = BOARD_GPON_CONFIG,
@@ -955,14 +822,14 @@ MV_BOARD_INFO sg200_i_Info = {
 	 ** entry of the arrays below, and set the boardTdmInfoIndex to 0.
 	 */
 	.numBoardTdmInfo = {},
-	.pBoardTdmInt2CsInfo = { sg200_i_Tdm880 },
+	.pBoardTdmInt2CsInfo = { hgg420n_Tdm880 },
 	.boardTdmInfoIndex = -1,
 
 	/* NAND init params */
-	.nandFlashReadParams = SG200_I_BOARD_NAND_READ_PARAMS,
-	.nandFlashWriteParams = SG200_I_BOARD_NAND_WRITE_PARAMS,
-	.nandFlashControl = SG200_I_BOARD_NAND_CONTROL,
-	.pBoardTdmSpiInfo = sg200_i_TdmSpiInfo
+	.nandFlashReadParams = HGG420N_BOARD_NAND_READ_PARAMS,
+	.nandFlashWriteParams = HGG420N_BOARD_NAND_WRITE_PARAMS,
+	.nandFlashControl = HGG420N_BOARD_NAND_CONTROL,
+	.pBoardTdmSpiInfo = hgg420n_TdmSpiInfo
 };
 
 
@@ -1027,7 +894,6 @@ MV_BOARD_INFO *boardInfoTbl[] = {
 	&rd88f6510Info,
 	&rd88f6560Info,
 	&rd88f6530Info,
-	&mi424wr_i_Info,
-	&sg200_i_Info,
+	&hgg420n_Info,
 	&dbCustomerInfo
 };

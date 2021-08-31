@@ -2357,10 +2357,8 @@ MV_U32 mvBoardIdGet(MV_VOID)
 		tmpBoardId = RD_88F6530_MDU_ID;
 #elif defined(RD_88F6560)
 		tmpBoardId = RD_88F6560_GW_ID;
-#elif defined(MI424WR_I)
-		tmpBoardId = MI424WR_I_ID;
-#elif defined(SG200)
-		tmpBoardId = SG200_ID;
+#elif defined(HGG420N)
+		tmpBoardId = HGG420N_ID;
 #elif defined(DB_CUSTOMER)
 		tmpBoardId = DB_CUSTOMER_ID;
 #endif

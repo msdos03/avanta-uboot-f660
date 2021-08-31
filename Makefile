@@ -2881,85 +2881,24 @@ endif
 #########################################################################
 
 #########################################################################
-## Actiontec (Marvell KW2 SoC based) Systems
+## HQW HGG420N (Marvell KW2 SoC based) System
 #########################################################################
-
-mi424wr_i_config: unconfig
+hgg420n_config: unconfig
 	@mkdir -p $(obj)include
-	@cp board/mv_feroceon/config_kw2/config_def.mk board/mv_feroceon/config_kw2/config.mk
+	@cp board/mv_feroceon/config_kw2/config_hgg420n.mk board/mv_feroceon/config_kw2/config.mk
 
 	@$(MKCONFIG) -a rd88f6560gw arm arm926ejs config_kw2 mv_feroceon feroceon
-	@echo "MV_OUTPUT = mi424wr_i" >> $(obj)include/config.mk
-#	@$(MKCONFIG) -a mi424wr_i arm arm926ejs config_kw2 mv_feroceon feroceon
-#	@echo "MV_OUTPUT = mi424wr_i" >> $(obj)include/config.mk
+	@echo "MV_OUTPUT = hgg420n" >> $(obj)include/config.mk
 
 	@echo "#define MV88F6560" > $(obj)include/config.h 
 	@echo "  * Configured for MV88F6560"
 
-	@echo "#define MI424WR_I" >> $(obj)include/config.h
-	@echo "#define MV_BOOTSIZE_512K" >> $(obj)include/config.h
-	@echo "#define MV_BOOTROM" >> $(obj)include/config.h
-	@echo "MV_DDR_FREQ=533_128m" >> $(obj)include/config.mk
-	@echo "  * Configured for MR424WR-I"
-
-	@echo "  * Little Endian byte ordering ";
-
-	@echo "DDR_TYPE=ddr3" >> $(obj)include/config.mk
-	@echo "  * DDR3 Support"
-
-	@echo "#define MV_USB" >> $(obj)include/config.h
-	@echo "  * With USB support"
-
-	@echo "#define MV_NAND_BOOT" >> $(obj)include/config.h
-	@echo "NAND_BOOT = y" >> $(obj)include/config.mk
-	@cp board/mv_feroceon/config_kw2/u-boot-sec256k.lds cpu/arm926ejs/u-boot.lds
-	@echo "  * Boot from NAND support"
-
-	@echo "#define MV_NAND" >> $(obj)include/config.h
-	@echo "  * NAND support"
-
-##NFC	@echo "      + NAND PIO Mode support"
-##NFC	@echo "#define MV_NAND_PIO_MODE" >> $(obj)include/config.h
-##NFC	@echo "      + 1 CS NAND support"
-##NFC	@echo "#define MV_NAND_1CS_MODE" >> $(obj)include/config.h
-##NFC	@echo "      + 4 bit ECC NAND support"
-##NFC	@echo "#define MV_NAND_4BIT_MODE" >> $(obj)include/config.h
-
-	@echo "BLK_SIZE=128" >> $(obj)include/config.mk
-	@echo "NAND_TECH=M" >> $(obj)include/config.mk
-	@echo "#define MV_LARGE_PAGE" >> $(obj)include/config.h
-	@echo "CONFIG_NAND_LP = y" >> $(obj)include/config.mk
-	@echo "  * Large Page NAND support"
-#	XXX 64Mb flash ?
-#	@echo "BLK_SIZE=16" >> $(obj)include/config.mk
-#	@echo "NAND_TECH=S" >> $(obj)include/config.mk
-#	@echo "#define MV_SMALL_PAGE" >> $(obj)include/config.h
-#	@echo "CONFIG_NAND_SP = y" >> $(obj)include/config.mk
-#	@echo "  * Small Page NAND support"
-
-	@echo "#define MV_JFFS2" >> $(obj)include/config.h
-	@echo "MV_JFFS2_SUPPORT = y" >> $(obj)include/config.mk
-	@echo "  * JFFS2 support"
-
-	@echo "#include <configs/mv_kw2.h>" >> $(obj)include/config.h
-
-
-sg200_config: unconfig
-	@mkdir -p $(obj)include
-	@cp board/mv_feroceon/config_kw2/config_sg200.mk board/mv_feroceon/config_kw2/config.mk
-
-	@$(MKCONFIG) -a rd88f6560gw arm arm926ejs config_kw2 mv_feroceon feroceon
-	@echo "MV_OUTPUT = sg200" >> $(obj)include/config.mk
-
-	@echo "#define MV88F6560" > $(obj)include/config.h 
-	@echo "  * Configured for MV88F6560"
-
-	@echo "#define SG200" >> $(obj)include/config.h
+	@echo "#define HGG420N" >> $(obj)include/config.h
 	@echo "#define MV_BOOTSIZE_512K" >> $(obj)include/config.h
 	@echo "#define MV_BOOTROM" >> $(obj)include/config.h
 	@echo "MV_DDR_FREQ=533_128m" >> $(obj)include/config.mk
 	@echo "NAND_TECH=S" >> $(obj)include/config.mk
-	@echo "  * Configured for SG200"
+	@echo "  * Configured for HGG420N"
 
 	@echo "  * Little Endian byte ordering ";
 
@@ -2971,7 +2910,7 @@ sg200_config: unconfig
 
 	@echo "#define MV_NAND_BOOT" >> $(obj)include/config.h
 	@echo "NAND_BOOT = y" >> $(obj)include/config.mk
-	@cp board/mv_feroceon/config_kw2/u-boot-sec256k-sg200.lds cpu/arm926ejs/u-boot.lds
+	@cp board/mv_feroceon/config_kw2/u-boot-sec256k-hgg420n.lds cpu/arm926ejs/u-boot.lds
 	@echo "  * Boot from NAND support"
 
 	@echo "#define MV_NAND" >> $(obj)include/config.h
@@ -2980,7 +2919,7 @@ sg200_config: unconfig
 	@echo "#define MV_LARGE_PAGE" >> $(obj)include/config.h
 
 
-	@cat sg200_extra.h >> $(obj)include/config.h
+	@cat hgg420n_extra.h >> $(obj)include/config.h
 
 
 	@echo "CONFIG_NAND_SP = y" >> $(obj)include/config.mk
@@ -2990,7 +2929,7 @@ sg200_config: unconfig
 	@echo "#include <configs/mv_kw2.h>" >> $(obj)include/config.h
 
 #########################################################################
-## END of Actiontec Systems
+## END of HQW HGG420N System
 #########################################################################
 
 #########################################################################
