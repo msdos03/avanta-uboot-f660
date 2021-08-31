@@ -9,16 +9,13 @@ do_compile()
 {
 	ENDIANESS=$1
 	BOARD=$2
-	TYPE=$3
 	PARAMS=$G_PARAMS
 
-	TAR_DIR="../images/LE"
 	ENDIAN=""
 	COMPILER="arm-mv5sft-linux-gnueabi-"
 
 	if [ $ENDIANESS == "be" ]; then
 		ENDIAN="BE=1"
-		TAR_DIR="../images/BE"
 		COMPILER="armeb-mv5sft-linux-gnueabi-"
 	fi
 
@@ -39,26 +36,13 @@ do_compile()
 			TEMP="ERROR"
 	esac
 
-	TAR_DIR=$TAR_DIR/$TEMP/$TYPE
-
 	export CROSS_COMPILE=$COMPILER
 	make mrproper
 	make $BOARD"_config" $PARAMS $ENDIAN
 	make -s >> log.txt
-	mkdir -p $TAR_DIR
-	cp u-boot-$BOARD* $TAR_DIR/
-	rm $TAR_DIR/*.srec
 }
 
 export ARCH=arm
-
-rm -Rf ../images
-mkdir ../images
-mkdir ../images/LE
-mkdir ../images/BE
-
-rm -f log.txt
-touch log.txt
 
 ############
 # DB Board #
@@ -97,5 +81,5 @@ G_PARAMS="NANDBOOT=1 NAND=1"
 # RD-GW Board #
 ###############
 ##do_compile le rd88f6560gw NAND
-do_compile le hgg420n NAND
+do_compile le hgg420n
 
