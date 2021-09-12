@@ -329,6 +329,7 @@ bank0:
  gpio17: warning
  gpio21: voice1
 bank1:
+ gpio13: reset button(out)
  gpio17: pon network
  gpio18: pon port
  gpio20: voice2
@@ -337,6 +338,8 @@ bank1:
  gpio29: ethernet 4
  gpio31: ethernet 3
 bank2:
+ gpio8: wireless button(out)
+ gpio9: wps button(out)
  gpio11: WPS (red)
  gpio12: WPS (green)
  gpio13: USB
