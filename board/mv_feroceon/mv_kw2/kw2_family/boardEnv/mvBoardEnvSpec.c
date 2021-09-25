@@ -770,9 +770,9 @@ MV_BOARD_SWITCH_INFO f660_InfoBoardSwitchValue[] = {
 
 MV_U8 f660_LedGppPin[] = { };
 
-MV_BOARD_TDM_INFO f660_Tdm880[] = { };
+MV_BOARD_TDM_INFO f660_Tdm880[] = { {1} };
 
-MV_BOARD_TDM_SPI_INFO f660_TdmSpiInfo[] = { };
+MV_BOARD_TDM_SPI_INFO f660_TdmSpiInfo[] = { {1} };
 
 MV_BOARD_INFO f660_Info = {
 	.boardName = "F660",
@@ -821,9 +821,9 @@ MV_BOARD_INFO f660_Info = {
 	 ** For RD and Customers boards we only need to initialize a single
 	 ** entry of the arrays below, and set the boardTdmInfoIndex to 0.
 	 */
-	.numBoardTdmInfo = {},
+	.numBoardTdmInfo = {1},
 	.pBoardTdmInt2CsInfo = { f660_Tdm880 },
-	.boardTdmInfoIndex = -1,
+	.boardTdmInfoIndex = 0,
 
 	/* NAND init params */
 	.nandFlashReadParams = F660_BOARD_NAND_READ_PARAMS,
