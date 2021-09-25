@@ -235,22 +235,6 @@ extern "C" {
 #define MV_6550_DEV_ID		0x6550
 #define MV_6560_DEV_ID		0x6560
 
-#define MV_6510_Z1_REV         		0x0
-#define MV_6510_Z1_ID          		((MV_6510_DEV_ID << 16) | MV_6510_Z1_REV)
-#define MV_6510_Z1_NAME         	"88F6510 Z1"
-
-#define MV_6530_Z1_REV         		0x0
-#define MV_6530_Z1_ID          		((MV_6530_DEV_ID << 16) | MV_6530_Z1_REV)
-#define MV_6530_Z1_NAME         	"88F6530 Z1"
-
-#define MV_6550_Z1_REV         		0x0
-#define MV_6550_Z1_ID          		((MV_6550_DEV_ID << 16) | MV_6550_Z1_REV)
-#define MV_6550_Z1_NAME         	"88F6550 Z1"
-
-#define MV_6560_Z1_REV         		0x0
-#define MV_6560_Z1_ID          		((MV_6560_DEV_ID << 16) | MV_6560_Z1_REV)
-#define MV_6560_Z1_NAME         	"88F6560 Z1"
-
 #define MV_6510_Z2_REV         		0x1
 #define MV_6510_Z2_ID          		((MV_6510_DEV_ID << 16) | MV_6510_Z2_REV)
 #define MV_6510_Z2_NAME         	"88F6510 Z2"
@@ -267,8 +251,24 @@ extern "C" {
 #define MV_6560_Z2_ID          		((MV_6560_DEV_ID << 16) | MV_6560_Z2_REV)
 #define MV_6560_Z2_NAME         	"88F6560 Z2"
 
+#define MV_6510_A0_REV         		0x2
+#define MV_6510_A0_ID          		((MV_6510_DEV_ID << 16) | MV_6510_A0_REV)
+#define MV_6510_A0_NAME         	"88F6510 A0"
+
+#define MV_6530_A0_REV         		0x2
+#define MV_6530_A0_ID          		((MV_6530_DEV_ID << 16) | MV_6530_A0_REV)
+#define MV_6530_A0_NAME         	"88F6530 A0"
+
+#define MV_6550_A0_REV         		0x2
+#define MV_6550_A0_ID          		((MV_6550_DEV_ID << 16) | MV_6550_A0_REV)
+#define MV_6550_A0_NAME         	"88F6550 A0"
+
+#define MV_6560_A0_REV         		0x2
+#define MV_6560_A0_ID          		((MV_6560_DEV_ID << 16) | MV_6560_A0_REV)
+#define MV_6560_A0_NAME         	"88F6560 A0"
 
 #ifdef __cplusplus
 }
 #endif				/* __cplusplus */
 #endif				/* __INCmvDeviceIdh */
+

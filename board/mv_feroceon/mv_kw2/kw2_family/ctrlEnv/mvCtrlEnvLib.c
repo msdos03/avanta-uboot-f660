@@ -1143,18 +1143,6 @@ MV_U32 mvCtrlModelRevGet(MV_VOID)
 MV_STATUS mvCtrlModelRevNameGet(char *pNameBuff)
 {
 	switch (mvCtrlModelRevGet()) {
-	case MV_6510_Z1_ID:
-		mvOsSPrintf(pNameBuff, "%s", MV_6510_Z1_NAME);
-		break;
-	case MV_6530_Z1_ID:
-		mvOsSPrintf(pNameBuff, "%s", MV_6530_Z1_NAME);
-		break;
-	case MV_6550_Z1_ID:
-		mvOsSPrintf(pNameBuff, "%s", MV_6550_Z1_NAME);
-		break;
-	case MV_6560_Z1_ID:
-		mvOsSPrintf(pNameBuff, "%s", MV_6560_Z1_NAME);
-		break;
 	case MV_6510_Z2_ID:
 		mvOsSPrintf(pNameBuff, "%s", MV_6510_Z2_NAME);
 		break;
@@ -1166,6 +1154,18 @@ MV_STATUS mvCtrlModelRevNameGet(char *pNameBuff)
 		break;
 	case MV_6560_Z2_ID:
 		mvOsSPrintf(pNameBuff, "%s", MV_6560_Z2_NAME);
+		break;
+	case MV_6510_A0_ID:
+		mvOsSPrintf(pNameBuff, "%s", MV_6510_A0_NAME);
+		break;
+	case MV_6530_A0_ID:
+		mvOsSPrintf(pNameBuff, "%s", MV_6530_A0_NAME);
+		break;
+	case MV_6550_A0_ID:
+		mvOsSPrintf(pNameBuff, "%s", MV_6550_A0_NAME);
+		break;
+	case MV_6560_A0_ID:
+		mvOsSPrintf(pNameBuff, "%s", MV_6560_A0_NAME);
 		break;
 
 	default:
