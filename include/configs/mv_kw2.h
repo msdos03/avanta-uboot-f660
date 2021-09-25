@@ -389,7 +389,7 @@ extern unsigned int mvTclkGet(void);
  #define CONFIG_EEPRO100		/* Support for Intel 82557/82559/82559ER chips */
  #define CONFIG_E1000
  #define CONFIG_SK98			/* yukon */
- //#define YUK_ETHADDR         		"00:00:00:EE:51:81"
+ #define YUK_ETHADDR         		"00:00:00:EE:51:81"
  #define CONFIG_DRIVER_RTL8029 
 
 /* DB_PRPMC support only Yukon */
