@@ -103,16 +103,16 @@ disclaimer.
 
 /* SDRAM: actual mapping is auto detected */
 #define SDRAM_CS0_BASE  0x00000000
-#define SDRAM_CS0_SIZE  _512M
+#define SDRAM_CS0_SIZE  _256M
 
-#define SDRAM_CS1_BASE  0x20000000
-#define SDRAM_CS1_SIZE  0
+#define SDRAM_CS1_BASE  0x10000000
+#define SDRAM_CS1_SIZE  _256M
 
-#define SDRAM_CS2_BASE  0x30000000
-#define SDRAM_CS2_SIZE  0
+#define SDRAM_CS2_BASE  0x20000000
+#define SDRAM_CS2_SIZE  _256M
 
-#define SDRAM_CS3_BASE  0x40000000
-#define SDRAM_CS3_SIZE  0
+#define SDRAM_CS3_BASE  0x30000000
+#define SDRAM_CS3_SIZE  _256M
 
 /* PEX */
 #define PEX0_MEM_BASE 0x90000000
