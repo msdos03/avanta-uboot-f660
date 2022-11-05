@@ -182,6 +182,7 @@ MV_VOID mvEthSWInternalGEPhyBasicInit(MV_U32 port, MV_U32 ethComplex)
  ***********************************************************/
 void mvBoardEgigaPhyInit(void) 
 {
+	MV_U16 value;
 	MV_U32 ethComplex = mvBoardEthComplexConfigGet();
 	MV_U32 portEnabled = 0;
 	MV_U32 reg;
@@ -252,6 +253,24 @@ void mvBoardEgigaPhyInit(void)
 			mvEthPhyRegWrite(9, 0x16, 3);
 			mvEthPhyRegWrite(9, 0x10, 0x1771);
 			mvEthPhyRegWrite(9, 0x16, 0);
+		}
+
+		if (mvBoardIdGet() == F660_ID) {
+			/* Set internal Gigabit PHY LED mode to (On-Link, Blink-Activity, Off-No link) (according to 88e1510 document) */
+			mvEthSwitchPhyRegWrite(0, 0, 0x16, 3);
+			mvEthSwitchPhyRegRead(0, 0, 0x10, &value);
+			value &= ~0xf;
+			value |= 0x1;
+			mvEthSwitchPhyRegWrite(0, 0, 0x10, value);
+			mvEthSwitchPhyRegWrite(0, 0, 0x16, 0);
+
+			/* Set internal 3xFE PHYs LED mode to (On-Link, Blink-Activity, Off-No link) (according to 88e3016 document and my try) */
+			for (i = 1; i < 4; i++) {
+				mvEthSwitchPhyRegRead(0, i, 0x16, &value);
+				value &= ~0xf;
+				value |= 0xa;
+				mvEthSwitchPhyRegWrite(0, i, 0x16, value);
+			}
 		}
 
 		if (ethComplex & (ESC_OPT_RGMIIA_SW_P5 | ESC_OPT_RGMIIA_SW_P6)) {
