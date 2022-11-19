@@ -44,14 +44,29 @@ int cleanup_before_linux (void)
 	 * we turn off caches etc ...
 	 */
 
-	disable_interrupts ();
+	unsigned long i;
 
+	disable_interrupts ();
 
 	/* turn off I/D-cache */
 	icache_disable();
 	dcache_disable();
 	/* flush I/D-cache */
 	cache_flush();
+
+#ifdef CONFIG_MARVELL
+	/* turn off L2 Cache */
+	asm ("mrc p15, 1, %0, c15, c1, 0":"=r" (i));
+	i &= ~0x00400000;
+	asm ("mcr p15, 1, %0, c15, c1, 0": :"r" (i));
+	__asm__ __volatile__("nop;nop;nop;nop;nop;nop;nop");
+	/* Clean L2 Cache */
+	asm ("mcr p15, 1, %0, c15, c9, 0": :"r" (i));
+	__asm__ __volatile__("nop;nop;nop;nop;nop;nop;nop");
+	/* Drain write buffer */
+	asm ("mcr p15, 0, %0, c7, c10, 4": :"r" (i));
+	__asm__ __volatile__("nop;nop;nop;nop;nop;nop;nop");
+#endif
 
 	return 0;
 }
