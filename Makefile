@@ -2881,7 +2881,7 @@ endif
 #########################################################################
 
 #########################################################################
-## ZTE F660 (Marvell KW2 SoC based) System
+## ZTE F660 (Marvell KW2 SoC based) System (32M NAND)
 #########################################################################
 f660_config: unconfig
 	@mkdir -p $(obj)include
@@ -2929,7 +2929,59 @@ f660_config: unconfig
 	@echo "#include <configs/mv_kw2.h>" >> $(obj)include/config.h
 
 #########################################################################
-## END of ZTE F660 System
+## END of ZTE F660 System (32M NAND)
+#########################################################################
+
+#########################################################################
+## ZTE F660 (Marvell KW2 SoC based) System (128M NAND)
+#########################################################################
+f660lp_config: unconfig
+	@mkdir -p $(obj)include
+	@cp board/mv_feroceon/config_kw2/config_f660.mk board/mv_feroceon/config_kw2/config.mk
+
+	@$(MKCONFIG) -a rd88f6560gw arm arm926ejs config_kw2 mv_feroceon feroceon
+	@echo "MV_OUTPUT = f660" >> $(obj)include/config.mk
+
+	@echo "#define MV88F6560" > $(obj)include/config.h 
+	@echo "  * Configured for MV88F6560"
+
+	@echo "#define F660" >> $(obj)include/config.h
+	@echo "#define MV_BOOTSIZE_512K" >> $(obj)include/config.h
+	@echo "#define MV_BOOTROM" >> $(obj)include/config.h
+	@echo "MV_DDR_FREQ=f660_128m" >> $(obj)include/config.mk
+	@echo "NAND_TECH=S" >> $(obj)include/config.mk
+	@echo "  * Configured for F660"
+
+	@echo "  * Little Endian byte ordering ";
+
+	@echo "DDR_TYPE=ddr3" >> $(obj)include/config.mk
+	@echo "  * DDR3 Support"
+
+	@echo "#define MV_USB" >> $(obj)include/config.h
+	@echo "  * With USB support"
+
+	@echo "#define MV_NAND_BOOT" >> $(obj)include/config.h
+	@echo "NAND_BOOT = y" >> $(obj)include/config.mk
+	@cp board/mv_feroceon/config_kw2/u-boot-sec256k-f660.lds cpu/arm926ejs/u-boot.lds
+	@echo "  * Boot from NAND support"
+
+	@echo "#define MV_NAND" >> $(obj)include/config.h
+	@echo "  * NAND support"
+
+	@echo "#define MV_LARGE_PAGE" >> $(obj)include/config.h
+
+
+	@cat f660_extra.h >> $(obj)include/config.h
+
+
+	@echo "CONFIG_NAND_LP = y" >> $(obj)include/config.mk
+	@echo "  * Large Page NAND support"
+	@echo "BLK_SIZE=128" >> $(obj)include/config.mk
+
+	@echo "#include <configs/mv_kw2.h>" >> $(obj)include/config.h
+
+#########################################################################
+## END of ZTE F660 System (128M NAND)
 #########################################################################
 
 #########################################################################

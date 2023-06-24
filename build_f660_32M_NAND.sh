@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export PATH=/opt/marvell/cross/bin:$PATH
+export PATH=~/marvell/cross/bin:$PATH
 
 G_PARAMS=""
 
