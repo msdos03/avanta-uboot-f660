@@ -1,7 +1,7 @@
 /*
  * Default environment variables
  */
-#define CONFIG_BOOTCOMMAND             "nand read 2000000 100000 300000;bootm"
+#define CONFIG_BOOTCOMMAND             "nand read 2000000 100000 400000;bootm"
 
 /* #define CONFIG_MTDPARTS                "mtdparts=nand:2m(uboot),-(ubi)" */
 #define CONFIG_MTDPARTS "mtdparts=nand:1m(uboot),-(firmware)"
