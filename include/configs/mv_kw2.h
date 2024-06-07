@@ -513,13 +513,13 @@ extern unsigned int mvTclkGet(void);
 	#if defined(MV_NAND_BOOT)
 		#define CONFIG_ENV_IS_IN_NAND
 
-		#define CONFIG_ENV_SIZE				4096		/* environment takes one erase block */
+		#define CONFIG_ENV_SIZE				0x4000		/* environment takes one erase block */
 		#define CONFIG_ENV_OFFSET			0xC0000
 		#define CONFIG_ENV_ADDR				CONFIG_ENV_OFFSET
 		#define MONITOR_HEADER_LEN			0x200
 		#define CONFIG_SYS_MONITOR_BASE			0
-		#define CONFIG_SYS_MONITOR_LEN			CONFIG_ENV_OFFSET /* Reserve 512 kB for Monitor */
-		#define CONFIG_ENV_RANGE 			CONFIG_ENV_SIZE * 2
+		#define CONFIG_SYS_MONITOR_LEN			CONFIG_ENV_OFFSET /* Reserve 768 kB for Monitor */
+		#define CONFIG_ENV_RANGE 			CONFIG_ENV_SIZE
 
 		#define MV_NBOOT_BASE				0
 		#define MV_NBOOT_LEN				(4 << 10)		/* Reserved 4KB for boot strap */
